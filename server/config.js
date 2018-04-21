@@ -24,6 +24,7 @@ const CONF = {
     tunnelServerUrl: "https://ws.qcloud.com",
     tunnelSignatureKey: "$littleprog4me",
     qcloudAppId: "1256514917",
+    qcloudSecretId: "AKIDSn9OSM6lKi0hYKqKWbUoFYgusGZkhnGE",
     qcloudSecretKey: "z1xbAf3ShDcqunUzMav66uWwAKMMWIvN",
     wxMessageToken: "9msg9",
     wxLoginExpires: 7200
