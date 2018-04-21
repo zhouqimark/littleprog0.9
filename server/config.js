@@ -20,6 +20,13 @@ const CONF = {
         uploadFolder: ""
     },
 
+    serverHost: "ndp6uzzo.qcloud.la",
+    tunnelServerUrl: "https://ws.qcloud.com",
+    tunnelSignatureKey: "$littleprog4me",
+    qcloudAppId: "1256514917",
+    qcloudSecretKey: "z1xbAf3ShDcqunUzMav66uWwAKMMWIvN",
+    wxMessageToken: "9msg9",
+    wxLoginExpires: 7200
     
 }
 
