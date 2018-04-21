@@ -4,13 +4,14 @@ const CONF = {
     appId: "wxf463e014415ddaef",
     appSecret: "38a7a3b1cdeab1df3f5c80341e7ff4cf",
 
-    useQccloudLogin: true,
+    useQcloudLogin: true,
 
     mysql: {
         host: "localhost",
         port: 3306,
         user: "root",
         pass: "wxf463e014415ddaef",
+        db: "cAuth",
         char: "utf8mb4"
     },
 
