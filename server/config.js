@@ -23,8 +23,8 @@ const CONF = {
     serverHost:"",
     tunnelServerUrl: "",
     tunnelSignarureKey: "",
-    qcloudAppId: "",
-    qcloudSecretKey: "",
+    qcloudAppId: "1256514917",
+    qcloudSecretKey: "z1xbAf3ShDcqunUzMav66uWwAKMMWIvN",
     wxMessageToken: "",
     wxLoginExpires: 7200
 }
