@@ -1,4 +1,4 @@
-// pages/vip/vip.js
+// pages/infopulish/infopulish.js
 Page({
 
   /**

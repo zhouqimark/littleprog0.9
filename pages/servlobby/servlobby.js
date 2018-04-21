@@ -1,4 +1,4 @@
-// pages/cooperation/cooperation.js
+// pages/servlobby/servlobby.js
 Page({
 
   /**

@@ -10,6 +10,22 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if(res.code) {
+          wx.request({
+            url: "https://ndp6uzzo.qcloud.la",
+            data: {
+              code: res.code
+            },
+            success: res => {
+              var data = res.data;
+              var statusCode = res.statusCode;
+              var header = res.header;
+              console.log(data);
+            }
+          })
+        } else {
+          console.log("login in failed" + res.errMsg);
+        }
       }
     })
     // 获取用户信息
