@@ -1,4 +1,22 @@
 const fs = require("fs");
 const path = require("path");
 
-const 
+const mapDir = d => {
+    const tree = {};
+
+    const [dirs, files] = _(fs.readdirSync(d)).partition(p => { fs.statSync(path.join(d, p)).isDirectory()});
+
+    dir.forEach(dir => {
+        tree[dir] = mapDir(path.join(d, dir));
+    });
+
+    files.forEach(file => {
+        if(path.extname(file) === ".js") {
+            tree[path.basename(file, ".js")] = require(path.join(d, file));
+        }
+    });
+
+    return tree;
+}
+
+module.exports = mapDir(path.join(__dirname));
