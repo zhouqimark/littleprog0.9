@@ -20,10 +20,10 @@ var showSuccess = text => {
   })
 };
 
-var showModel = (title, content) => {
+var showModal = (title, content) => {
   wx.hideToast();
 
-  wx.showModel({
+  wx.showModal({
     title: title,
     content: JSON.stringify(content),
     showCancel: false
@@ -39,7 +39,7 @@ var doLogin = function() {
     },
 
     fail(error) {
-      showModel("登陆失败", error);
+      showModal("登陆失败", error);
       console.log("登陆失败", error);
     }
   })
