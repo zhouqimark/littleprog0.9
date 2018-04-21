@@ -20,6 +20,12 @@ const CONF = {
         uploadFolder: ""
     },
 
+    serverHost:"",
+    tunnelServerUrl: "",
+    tunnelSignarureKey: "",
+    qcloudAppId: "",
+    qcloudSecretKey: "",
+    wxMessageToken: "",
     wxLoginExpires: 7200
 }
 
