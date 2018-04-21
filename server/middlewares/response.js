@@ -10,11 +10,11 @@ module.exports = async (ctx, next) => {
     } catch (e) {
         debug("Catch Error: %o", e);
 
-        ctx.status = 500;
+        ctx.status = 200;
 
         ctx.body = {
             code: -1,
-            error: e &&e.message ? e.message : e.toString()
+            error: e && e.message ? e.message : e.toString()
         }
     }
 }
