@@ -2,6 +2,32 @@
 //获取应用实例
 const app = getApp()
 
+const qcloud = require("../../vendor/wafer2-client-sdk/index");
+const confg = require("../../config");
+
+var showBusy = text => {
+  wx.showToast({
+    title: text,
+    icon: "loading",
+    duration: 10000
+  })
+};
+var doLogin = function() {
+  showBusy("正在登陆");
+  qcloud.login({
+    success(result) {
+      showSuccess("登陆成功");
+      console.log("登陆成功", result);
+    },
+
+    fail(error) {
+      showModel("登陆失败", error);
+      console.log("登陆失败", error);
+    }
+  })
+};
+
+
 Page({
   data: {
     shareTitle: "分享筋英汇",
@@ -14,28 +40,11 @@ Page({
       image: "",
     }]
   },
-  onLoad: function (opts) {
-    wx.setTabBarBadge({
-      index: 0,
-      text: '9',
-    })
-    wx.showTabBarRedDot({
-      index: 3,
-    })
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    doLogin();
   },
 
   /**
