@@ -1,6 +1,6 @@
 const CONF = {
     port: "5757",
-    rootPathname: "",
+    rootPathname: "./",
     appId: "wxf463e014415ddaef",
     appSecret: "38a7a3b1cdeab1df3f5c80341e7ff4cf",
 
@@ -20,13 +20,7 @@ const CONF = {
         uploadFolder: ""
     },
 
-    serverHost:"ndp6uzzo.qcloud.la",
-    tunnelServerUrl: "https://ws.qcloud.com",
-    tunnelSignatureKey: "$littleprog4me",
-    qcloudAppId: "1256514917",
-    qcloudSecretKey: "z1xbAf3ShDcqunUzMav66uWwAKMMWIvN",
-    wxMessageToken: "9msg9",
-    wxLoginExpires: 7200
+    
 }
 
 module.exports = CONF;
