@@ -1,4 +1,4 @@
-var host = "ndp6uzzo.qcloud.la";
+var host = "https://ndp6uzzo.qcloud.la";
 
 var config = {
     service: {
