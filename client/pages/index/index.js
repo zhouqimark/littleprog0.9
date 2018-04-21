@@ -12,6 +12,24 @@ var showBusy = text => {
     duration: 10000
   })
 };
+
+var showSuccess = text => {
+  wx.showToast({
+    title: text,
+    icon: "success"
+  })
+};
+
+var showModel = (title, content) => {
+  wx.hideToast();
+
+  wx.showModel({
+    title: title,
+    content: JSON.stringify(content),
+    showCancel: false
+  })
+};
+
 var doLogin = function() {
   showBusy("正在登陆");
   qcloud.login({
