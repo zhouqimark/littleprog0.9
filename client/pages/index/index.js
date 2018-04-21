@@ -49,20 +49,17 @@ var doLogin = function() {
 Page({
   data: {
     shareTitle: "分享筋英汇",
-    shareTo: "/pages/index/index",
-    newInfos: [{
-      id: "new0",
-      title: "hi",
-      disc: "here shows daily news",
-      url: "",
-      image: "",
-    }]
+    shareTo: "/pages/index/index"
+  },
+
+  onLoad: function(opts) {
+    doLogin();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    doLogin();
+    
   },
 
   /**
