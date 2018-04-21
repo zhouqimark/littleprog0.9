@@ -1,4 +1,4 @@
-const Koa = requrie("koa");
+const Koa = require("koa");
 const app = new Koa();
 const debug = require("debug")("little-prog");
 const response = require("./middlewares/response");
