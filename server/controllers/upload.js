@@ -1,4 +1,4 @@
-const { uploader } = requrie("../qcloud");
+const { uploader } = require("../qcloud");
 
 moduel.exports = async ctx => {
     const data = await uploader(ctx.req)
