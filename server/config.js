@@ -16,8 +16,8 @@ const CONF = {
 
     cos: {
         region: "ap-guangzhou",
-        fileBucket: "lp",
-        uploadFolder: ""
+        fileBucket: "lp-1256514917",
+        uploadFolder: "OBJ"
     },
 
     serverHost: "ndp6uzzo.qcloud.la",
