@@ -27,7 +27,7 @@ const CONF = {
     qcloudAppId: "1256514917",
     qcloudSecretId: "AKIDSn9OSM6lKi0hYKqKWbUoFYgusGZkhnGE",
     qcloudSecretKey: "z1xbAf3ShDcqunUzMav66uWwAKMMWIvN",
-    wxMessageToken: "9msg9",
+    wxMessageToken: "msg2u",
     wxLoginExpires: 7200
     
 }
