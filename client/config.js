@@ -3,7 +3,8 @@ var host = "ndp6uzzo.qcloud.la";
 var config = {
     service: {
         host,
-        loginUrl: `${host}/weapp/login`
+        loginUrl: `${host}/weapp/login`,
+        requestUrl: `${host}/weapp/user`
     }
 }
 
