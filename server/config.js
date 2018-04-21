@@ -22,7 +22,7 @@ const CONF = {
     },
 
     serverHost: "ndp6uzzo.qcloud.la",
-    tunnelServerUrl: "https://ws.qcloud.com",
+    tunnelServerUrl: "ndp6uzzo.ws.qcloud.la",
     tunnelSignatureKey: "$littleprog4me",
     qcloudAppId: "1256514917",
     qcloudSecretId: "AKIDSn9OSM6lKi0hYKqKWbUoFYgusGZkhnGE",
