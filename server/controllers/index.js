@@ -6,7 +6,7 @@ const mapDir = d => {
 
     const [dirs, files] = _(fs.readdirSync(d)).partition(p => { fs.statSync(path.join(d, p)).isDirectory()});
 
-    dir.forEach(dir => {
+    dirs.forEach(dir => {
         tree[dir] = mapDir(path.join(d, dir));
     });
 
