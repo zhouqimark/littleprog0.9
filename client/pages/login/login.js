@@ -1,6 +1,7 @@
 // pages/login/login.js
 
-
+let date = new Date(); 
+const format_date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
 
 Page({
 
@@ -8,12 +9,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isAgree: true
+    isAgree: true,
+    date: format_date
   },
 
   bindAgreeChange: function(e) {
     this.setData({
       isAgree: this.data.isAgree ? false : true
+    });
+  },
+
+  bindDateChange: function(e) {
+    var val = e.detail.value;
+    this.setData({
+      date: val
     });
   },
   
