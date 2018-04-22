@@ -53,6 +53,15 @@ Page({
   },
 
   onLoad: function(opts) {
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting["scop.getUserInfo"]) {
+          wx.authorize({
+            scope: "scope.getUserInfo"
+          })
+        }
+      }
+    })
     doLogin();
   },
   /**
