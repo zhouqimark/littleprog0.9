@@ -1,34 +1,44 @@
 const CONF = {
-    port: "5757",
-    appId: "wxf463e014415ddaef",
-    appSecret: "38a7a3b1cdeab1df3f5c80341e7ff4cf",
+    port: '5757',
+    rootPathname: '',
 
+    // 微信小程序 App ID
+    appId: 'wxf463e014415ddaef',
+
+    // 微信小程序 App Secret
+    appSecret: '38a7a3b1cdeab1df3f5c80341e7ff4cf',
+
+    // 是否使用腾讯云代理登录小程序
     useQcloudLogin: true,
 
+    /**
+     * MySQL 配置，用来存储 session 和用户信息
+     * 若使用了腾讯云微信小程序解决方案
+     * 开发环境下，MySQL 的初始密码为您的微信小程序 appid
+     */
     mysql: {
-        host: "localhost",
+        host: 'localhost',
         port: 3306,
-        user: "root",
-        pass: "wxf463e014415ddaef",
-        db: "cAuth",
-        char: "utf8mb4"
+        user: 'root',
+        db: 'cAuth',
+        pass: '38a7a3b1cdeab1df3f5c80341e7ff4cf',
+        char: 'utf8mb4'
     },
 
     cos: {
-        region: "ap-guangzhou",
-        fileBucket: "lp-1256514917",
-        uploadFolder: "OBJ"
+        /**
+         * 区域
+         * @查看 https://cloud.tencent.com/document/product/436/6224
+         */
+        region: 'ap-guangzhou',
+        // Bucket 名称
+        fileBucket: 'wximg',
+        // 文件夹
+        uploadFolder: ''
     },
 
-    serverHost: "ndp6uzzo.qcloud.la",
-    tunnelServerUrl: "ndp6uzzo.ws.qcloud.la",
-    tunnelSignatureKey: "$littleprog4me",
-    qcloudAppId: "1256514917",
-    qcloudSecretId: "AKIDSn9OSM6lKi0hYKqKWbUoFYgusGZkhnGE",
-    qcloudSecretKey: "z1xbAf3ShDcqunUzMav66uWwAKMMWIvN",
-    wxMessageToken: "msg2u",
+    // 微信登录态有效期
     wxLoginExpires: 7200
-    
 }
 
-module.exports = CONF;
+module.exports = process.env.NODE_ENV === 'local' ? Object.assign({}, CONF, require('./config.local')) : CONF;
