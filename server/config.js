@@ -1,6 +1,5 @@
 const CONF = {
     port: "5757",
-    rootPathname: "./",
     appId: "wxf463e014415ddaef",
     appSecret: "38a7a3b1cdeab1df3f5c80341e7ff4cf",
 
