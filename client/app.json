@@ -4,7 +4,8 @@
     "pages/daily/daily",
     "pages/infopulish/infopulish",
     "pages/servlobby/servlobby",
-    "pages/infolist/infolist"
+    "pages/infolist/infolist",
+    "pages/login/login"
   ],
   "tabBar": {
     "list": [

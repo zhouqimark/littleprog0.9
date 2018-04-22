@@ -1,20 +1,28 @@
-// pages/infopulish/infopulish.js
+// pages/login/login.js
+
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    isAgree: true
   },
 
+  bindAgreeChange: function(e) {
+    this.setData({
+      isAgree: this.data.isAgree ? false : true
+    });
+  },
+  
+  bindLogin: function(e) {},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.redirectTo({
-      url: "/pages/login/login?hello=world"
-    });
+  
   },
 
   /**
