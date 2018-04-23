@@ -3,7 +3,7 @@
 const app = getApp()
 
 const qcloud = require("../../vendor/wafer2-client-sdk/index");
-const confg = require("../../config");
+const config = require("../../config");
 
 var showBusy = text => {
   wx.showToast({
