@@ -1,1 +1,26 @@
 /* pages/login/login.wxss */
+.user-avatar {
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    max-height: 200rpx;
+    min-height: 10rpx;
+    max-width: 200rpx;
+    min-width: 10rpx;
+
+    border-radius: 50%;
+    border-width: 30rpx;
+    border-color: beige;
+    border-style: solid;
+
+    /* 图片居中显示 */
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+}
+
+.user-nickname {
+    display: flex;
+    justify-content: center;
+    font-size: 23rpx;
+}

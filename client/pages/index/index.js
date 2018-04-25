@@ -36,6 +36,14 @@ var doLogin = function() {
     success(result) {
       showSuccess("登陆成功");
       console.log("登陆成功", result);
+      try {
+        wx.setStorageSync("userInfo", {
+          nickName: result.nickName,
+          avatarUrl: result.avatarUrl
+        });
+      } catch(e) {
+        showModal("ERROR", "获取信息失败，请重试");
+      }
     },
 
     fail(error) {
@@ -53,15 +61,6 @@ Page({
   },
 
   onLoad: function(opts) {
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting["scop.getUserInfo"]) {
-          wx.authorize({
-            scope: "scope.getUserInfo"
-          })
-        }
-      }
-    })
     doLogin();
   },
   /**
