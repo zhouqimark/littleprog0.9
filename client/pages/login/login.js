@@ -55,13 +55,19 @@ Page(Object.assign({}, Zan.TopTips, {
     } else {
       var currCateg = this.data.currCateg === undefined ? this.data.categories[0] : this.data.currCateg;
       var currSubCateg = this.data.currSubCateg === undefined ? this.data.subCategories[0][0] : this.data.currSubCateg;
-      var finalUrl = config.service.loginUrl + "?" + "category=" + currCateg + "&" + "sub_category=" + currSubCateg;
+      var finalUrl = config.service.requestUrl + "/" + currCateg + "/" + currSubCateg;
       qcloud.request({
         url: finalUrl,
         login: true,
         method: "POST",
         header: {
           "Content-Type": "application/json"
+        },
+        data: {
+          name: infos.name,
+          date: infos.date,
+          wAge: infos.w_age,
+          telNumber: infos.tel_number
         },
         success: res => {
           console.log(res);
