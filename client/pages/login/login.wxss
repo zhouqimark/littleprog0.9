@@ -24,3 +24,34 @@
     justify-content: center;
     font-size: 23rpx;
 }
+
+/* 上传照片区域 */
+.images-area {
+  padding: 40rpx 0;
+}
+
+.images-tool {
+  display: flex;
+  align-items: center;
+}
+
+.images {
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+}
+
+.image-wrap {
+  width: 31%;
+  margin-right: 10rpx;
+}
+
+.image {
+  flex: 1;
+  height: 200rpx;
+  width: 100%;
+}
+
+.image-remover {
+  text-align: center;
+}

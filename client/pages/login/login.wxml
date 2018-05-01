@@ -65,9 +65,22 @@
       </picker-view>
     </view>
 
-    <view>
-      <view>添加证件照</view>
-      <image ></image>
+    <view class="images-area">
+
+      <!-- 添加图片按钮  -->
+      <view class="images-tool">
+        <button type="default" size="mini" bindtap="chooseImg" wx:if="{{images.length < 3}}">上传身份证正反照</button>
+      </view>
+
+      <!-- 图片缩略图  -->
+      <view class="images">
+        <block wx:for="{{images}}" wx:key="*this">
+          <view class="image-wrap">
+            <image class="image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+            <view class="image-remover" data-idx="{{index}}" bindtap="removeImage">删除</view>
+          </view>
+        </block>
+      </view>
     </view>
     
     <checkbox-group bindchange="bindAgreeChange">

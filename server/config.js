@@ -22,6 +22,7 @@ const CONF = {
         user: 'root',
         pass: "wxf463e014415ddaef",
         db: 'cAuth',
+        dialect: "mysql",
         char: 'utf8mb4'
     },
 

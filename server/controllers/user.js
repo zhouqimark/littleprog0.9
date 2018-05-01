@@ -1,5 +1,3 @@
-
-
 module.exports = async (ctx, next) => {
     // 通过 Koa 中间件进行登录态校验之后
     // 登录信息会被存储到 ctx.state.$wxInfo
@@ -21,7 +19,13 @@ module.exports = async (ctx, next) => {
             telNumber: telNumber,
             coType: coType
         };
+        //status代表信息录入状态1:success 0:failed
+        ctx.state.userData = userData;
         ctx.state.code = 400;
+
+        //model.sync();
+        //model.User.create(userData);
+
         /*
         User = model.User;
         var exit = User.findAll({

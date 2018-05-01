@@ -2,9 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/daily/daily",
-    "pages/infopulish/infopulish",
+    "pages/infopublish/infopublish",
     "pages/servlobby/servlobby",
-    "pages/infolist/infolist",
     "pages/login/login"
   ],
   "tabBar": {
@@ -16,7 +15,7 @@
         "selectedIconPath": "/images/ic_menu_choice_pressed.png"
       },
       {
-        "pagePath": "pages/infopulish/infopulish",
+        "pagePath": "pages/infopublish/infopublish",
         "text": "信息发布",
         "iconPath": "/images/ic_menu_sort_nor.png",
         "selectedIconPath": "/images/ic_menu_sort_pressed.png"

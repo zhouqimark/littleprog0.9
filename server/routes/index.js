@@ -16,6 +16,8 @@ router.get('/login', authorizationMiddleware, controllers.login)
 // 用户信息接口（可以用来验证登录态） /weapp/user
 router.post('/user/:category/:subCategory', validationMiddleware, controllers.user)
 
+router.get("/info", controllers.info);
+
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中 /weapp/upload
 router.post('/upload', controllers.upload)

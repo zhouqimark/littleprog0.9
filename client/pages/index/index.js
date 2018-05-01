@@ -4,37 +4,13 @@ const app = getApp()
 
 const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
-
-var showBusy = text => {
-  wx.showToast({
-    title: text,
-    icon: "loading",
-    duration: 10000
-  })
-};
-
-var showSuccess = text => {
-  wx.showToast({
-    title: text,
-    icon: "success"
-  })
-};
-
-var showModal = (title, content) => {
-  wx.hideToast();
-
-  wx.showModal({
-    title: title,
-    content: JSON.stringify(content),
-    showCancel: false
-  })
-};
+const msg = require("../../messages/normal");
 
 var doLogin = function() {
-  showBusy("正在登陆");
+  msg.showBusy("正在登陆");
   qcloud.login({
     success(result) {
-      showSuccess("登陆成功");
+      msg.showSuccess("登陆成功");
       console.log("登陆成功", result);
       try {
         wx.setStorageSync("userInfo", {
@@ -42,12 +18,12 @@ var doLogin = function() {
           avatarUrl: result.avatarUrl
         });
       } catch(e) {
-        showModal("ERROR", "获取信息失败，请重试");
+        msg.showModal("ERROR", "获取信息失败，请重试");
       }
     },
 
     fail(error) {
-      showModal("登陆失败", error);
+      msg.showModal("登陆失败", error);
       console.log("登陆失败", error);
     }
   })

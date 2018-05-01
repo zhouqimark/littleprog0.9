@@ -2,6 +2,7 @@
 const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
 var Zan = require("../../zanui/index");
+const msg = require("../../messages/normal");
 
 let date = new Date(); 
 const format_date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
@@ -20,7 +21,9 @@ Page(Object.assign({}, Zan.TopTips, {
       ["实力钢筋承包团队", "兄弟合包班组", "小料专业班组"],
       ["持证焊工", "aa", "bb"]
     ],
-    showSubCateg: ["开发商直接发包", "检出公司分包", "大商务分包", "实体商务分包"]
+    showSubCateg: ["开发商直接发包", "检出公司分包", "大商务分包", "实体商务分包"],
+
+    images: []
   },
 
   bindAgreeChange: function(e) {
@@ -46,6 +49,49 @@ Page(Object.assign({}, Zan.TopTips, {
       currSubCateg: y[val[1]],
       showSubCateg: y
     })
+  },
+
+  chooseImg: function(e) {
+    wx.chooseImage({
+      count: 2,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+      success: res => {
+        const images = this.data.images.concat(res.tempFilePaths);
+        if(images.length < 2) {
+          msg.showWarning("照片过少");
+          this.setData({
+            images
+          })
+        } else if(images.length > 2) {
+          msg.showWarning("照片过多");
+        } else {
+          this.setData({
+            images: images
+          })
+        }
+      }
+    })
+  },
+
+  handleImagePreview: function(e) {
+    var index = e.currentTarget.dataset.idx;
+    var images = this.data.images;
+    wx.previewImage({
+      current: images[index],
+      urls: images
+    })
+  },
+
+  removeImage: function(e) {
+    var index = e.currentTarget.dataset.idx;
+    var rmImgs = this.data.images.splice(index, 1);
+    var leftImgs = this.data.images;
+    if(rmImgs) {
+      this.setData({
+        images: leftImgs
+      })
+    }
   },
 
   formSubmit: function(e) {
