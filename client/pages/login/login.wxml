@@ -100,7 +100,7 @@
     </checkbox-group>
 
     <view class="weui-btn-area">
-      <button class="weui-btn" type="primary" plain="true" form-type="submit"注册</button>
+      <button class="weui-btn" type="primary" plain="true" form-type="submit">注册</button>
     </view>
   </view>
 </view>
