@@ -21,7 +21,7 @@ module.exports = async (ctx, next) => {
         };
         //status代表信息录入状态1:success 0:failed
         ctx.state.userData = userData;
-        ctx.state.code = 400;
+        ctx.state.code = 200;
 
         //model.sync();
         //model.User.create(userData);

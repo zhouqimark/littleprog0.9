@@ -18,6 +18,8 @@ router.post('/user/:category/:subCategory', validationMiddleware, controllers.us
 
 router.get("/info", controllers.info);
 
+router.post("/decryption", validationMiddleware, controllers.decryption);
+
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中 /weapp/upload
 router.post('/upload', controllers.upload)

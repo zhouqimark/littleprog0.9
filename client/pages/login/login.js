@@ -23,7 +23,8 @@ Page(Object.assign({}, Zan.TopTips, {
     ],
     showSubCateg: ["开发商直接发包", "检出公司分包", "大商务分包", "实体商务分包"],
 
-    images: []
+    images: [],
+    uploadPercent: 0
   },
 
   bindAgreeChange: function(e) {
@@ -37,6 +38,41 @@ Page(Object.assign({}, Zan.TopTips, {
     this.setData({
       date: val
     });
+  },
+
+  getPhoneNumber: function(e) {
+    wx.checkSession({
+      success: () => {
+        qcloud.request({
+          url: config.service.decryptionUrl,
+          header: {
+            "Content-Type": "application/json"
+          },
+
+          data: {
+            encryptedData: e.detail.encryptedData,
+            iv: e.detail.iv
+          },
+
+          method: "POST",
+          success: res => {
+            console.log(res.data.decryptedData);
+            this.setData({
+              phoneNumber: res.data.decryptedData.phoneNumber
+            })
+          },
+
+          fail : err => {
+            console.log(err);
+            msg.showWarning("获取失败，请手动输入");
+          }
+        })
+      },
+
+      fail: () => {
+        msg.showBusy("获取失败，正重新登录");
+      }
+    })
   },
   
   bindChange: function(e) {
@@ -97,18 +133,22 @@ Page(Object.assign({}, Zan.TopTips, {
   formSubmit: function(e) {
     var infos = e.detail.value;
     if(!infos.name ||!infos.date || !infos.w_age || !infos.tel_number || !this.data.isAgree){
+      //zanui
       this.showZanTopTips("注册信息不全");
+    } else if( this.data.images.length !== 2) {
+      this.showZanTopTips("照片信息不全");
     } else {
       var currCateg = this.data.currCateg === undefined ? this.data.categories[0] : this.data.currCateg;
       var currSubCateg = this.data.currSubCateg === undefined ? this.data.subCategories[0][0] : this.data.currSubCateg;
-      var finalUrl = config.service.requestUrl + "/" + currCateg + "/" + currSubCateg;
+      var requestUrl = config.service.requestUrl;
+      var finalUrl = requestUrl + "/" + currCateg + "/" + currSubCateg;
       qcloud.request({
         url: finalUrl,
         login: true,
-        method: "POST",
         header: {
           "Content-Type": "application/json"
         },
+        method: "POST",
         data: {
           name: infos.name,
           date: infos.date,
@@ -117,6 +157,22 @@ Page(Object.assign({}, Zan.TopTips, {
         },
         success: res => {
           console.log(res);
+          for(let i = 0; i < 2; i++) {
+            var uploadTask = wx.uploadFile({
+              url: requestUrl,
+              filePath: this.data.images[i],
+              name: i === 0 ? "front_img" : "back_img",
+              header: {
+                "Content-Type": "multipart/form-data"
+              }
+            });
+
+            uploadTask.onProgressUpdate(res => {
+              this.setData({
+                uploadPercent: res.progress
+              })
+            });
+          }
         },
       
         fail: err => {

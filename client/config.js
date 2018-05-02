@@ -5,7 +5,8 @@ var config = {
         host,
         loginUrl: `${host}/weapp/login`,
         requestUrl: `${host}/weapp/user`,
-        infoPublish: `${host}/weapp/info`
+        infoPublish: `${host}/weapp/info`,
+        decryptionUrl: `${host}/weapp/decryption`
     }
 }
 

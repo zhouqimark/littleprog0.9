@@ -14,7 +14,8 @@ module.exports = async function (ctx, next) {
         ctx.body = ctx.body ? ctx.body : {
             code: ctx.state.code !== undefined ? ctx.state.code : 0,
             data: ctx.state.data !== undefined ? ctx.state.data : {},
-            userData: ctx.state.userData !== undefined ? ctx.state.userData : {}
+            userData: ctx.state.userData !== undefined ? ctx.state.userData : {},
+            decryptedData: ctx.state.decryptedData !== undefined ? ctx.state.decryptedData : {}
         }
     } catch (e) {
         // catch 住全局的错误信息
