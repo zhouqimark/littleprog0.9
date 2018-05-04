@@ -6,30 +6,6 @@ const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
 const msg = require("../../messages/normal");
 
-var doLogin = function() {
-  msg.showBusy("正在登陆");
-  qcloud.login({
-    success(result) {
-      msg.showSuccess("登陆成功");
-      console.log("登陆成功", result);
-      try {
-        wx.setStorageSync("userInfo", {
-          nickName: result.nickName,
-          avatarUrl: result.avatarUrl
-        });
-      } catch(e) {
-        msg.showModal("ERROR", "获取信息失败，请重试");
-      }
-    },
-
-    fail(error) {
-      msg.showModal("登陆失败", error);
-      console.log("登陆失败", error);
-    }
-  })
-};
-
-
 Page({
   data: {
     shareTitle: "分享筋英汇",
@@ -37,7 +13,7 @@ Page({
   },
 
   onLoad: function(opts) {
-    doLogin();
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

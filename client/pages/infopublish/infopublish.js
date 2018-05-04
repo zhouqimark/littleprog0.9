@@ -1,6 +1,7 @@
 const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
 const msg = require("../../messages/normal");
+const util = require("../../utils/util");
 
 // pages/infopublish/infopublish.js
 Page({
@@ -17,6 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    /*
     qcloud.request({
       url: this.data.infoPublish,
       login: true,
@@ -35,20 +37,22 @@ Page({
         console.log(err);
       }
     })
+    */
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    //具体是checkUserInfoSettingStatu
+    util.checkSettingStatus();
   },
 
   /**

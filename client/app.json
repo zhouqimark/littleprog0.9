@@ -1,10 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/daily/daily",
     "pages/infopublish/infopublish",
-    "pages/servlobby/servlobby",
-    "pages/login/login"
+    "pages/servlobby/servlobby"
   ],
   "tabBar": {
     "list": [

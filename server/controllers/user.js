@@ -17,10 +17,18 @@ module.exports = async (ctx, next) => {
             date: date,
             wAge: wAge,
             telNumber: telNumber,
-            coType: coType
+            coType: coType,
+            registered: true
         };
+
+        var registeredStatus = {
+            name: name,
+            telNumber: telNumber,
+            registered: true
+        }
         //status代表信息录入状态1:success 0:failed
-        ctx.state.userData = userData;
+        ctx.state.registeredStatus = registeredStatus;
+        ctx.state.data = userData;
         ctx.state.code = 200;
 
         //model.sync();

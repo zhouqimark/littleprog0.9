@@ -5,6 +5,10 @@ var showBusy = text => {
       duration: 10000
     })
 };
+
+var hideBusy = () => {
+    wx.hideToast();
+}
   
 var showSuccess = text => {
     wx.showToast({
@@ -31,6 +35,7 @@ var showModal = (title, content) => {
 
 module.exports = ({
     showBusy: showBusy,
+    hideBusy: hideBusy,
     showSuccess: showSuccess,
     showModal: showModal,
     showWarning: showWarning

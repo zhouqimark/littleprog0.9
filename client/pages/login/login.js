@@ -1,30 +1,42 @@
 // pages/login/login.js
+/*
 const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
 var Zan = require("../../zanui/index");
 const msg = require("../../messages/normal");
+*/
 
-let date = new Date(); 
-const format_date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
-
-Page(Object.assign({}, Zan.TopTips, {
+//module.exports = Object.assign({}, Zan.TopTips, {
 
   /**
    * 页面的初始数据
    */
-  data: {
-    isAgree: true,
-    date: format_date,
-    categories: ["企业类", "jlsdk", "we", "fsdf"],
-    subCategories: [
-      ["开发商直接发包", "检出公司分包", "大商务分包", "实体商务分包"],
-      ["实力钢筋承包团队", "兄弟合包班组", "小料专业班组"],
-      ["持证焊工", "aa", "bb"]
-    ],
-    showSubCateg: ["开发商直接发包", "检出公司分包", "大商务分包", "实体商务分包"],
 
-    images: [],
-    uploadPercent: 0
+  //登陆获取用户基本信息
+  /*
+  doLogin: function() {
+    msg.showBusy("正在登陆");
+    qcloud.login({
+      success(userInfo) {
+        msg.showSuccess("登陆成功");
+        console.log("登陆成功", userInfo);
+        this.setData({userInfo: userInfo});
+        try {
+          wx.setStorageSync("userInfo", {
+            nickName: result.nickName,
+            avatarUrl: result.avatarUrl
+          });
+        } catch(e) {
+          msg.showModal("ERROR", "获取信息失败，请重试");
+        }
+      },
+  
+      fail(error) {
+        //msg.showModal("登陆失败", error);
+        console.log("登陆失败", error);
+      }
+    });
+
   },
 
   bindAgreeChange: function(e) {
@@ -185,9 +197,8 @@ Page(Object.assign({}, Zan.TopTips, {
   onViewTap: function(e) {
 
   },
+  */
   /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     try {
       var value = wx.getStorageSync("userInfo");
@@ -210,53 +221,39 @@ Page(Object.assign({}, Zan.TopTips, {
       });
     }
   },
+  
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  
   onShow: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
+  
   onHide: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
+  
   onUnload: function () {
   
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  
   onPullDownRefresh: function () {
   
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  
   onReachBottom: function () {
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
   
   }
-}));
+  */
+//});

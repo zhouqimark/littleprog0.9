@@ -1,3 +1,5 @@
 /**app.wxss**/
 @import 'weui.wxss';
 @import './zanui/index.wxss';
+
+@import './myui.wxss';
