@@ -13,7 +13,9 @@ Page({
   },
 
   onLoad: function(opts) {
-    
+    wx.navigateTo({
+      url: "../../template/project2group/project2group"
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

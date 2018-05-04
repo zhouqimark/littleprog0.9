@@ -10,8 +10,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    infoPublish: config.service.infoPublish
+    infoPublish: config.service.infoPublish,
+    navTab: ["项目找班组", "班组找项目", "个人找工作", "棒棒棒团队"],
+    currentNavTab: 0,
+    indicatorDots: false,
+    autoplay: true,
+    duration: 1000,
   
+  },
+
+  switchTab: function(e) {
+    const idx = e.currentTarget.dataset.idx;
+    this.setData({
+      currentNavTab: idx
+    })
   },
 
   /**
