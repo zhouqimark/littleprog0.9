@@ -1,24 +1,140 @@
-<view class="root">
-    <form bindsubmit="submitPassage">
-        <view class="content">
-            <textarea style="padding:26rpx;" name="textarea" maxlength="200" placeholder="请输入您想要发布的内容..." placeholder-style="color:#b2b2b2;"/>
-        </view>
-        <view class="images">
-            <view style="padding:15rpx 0 0 15rpx;">添加图片</view>
-            <view style="display:flex;">
-                <view wx:for="{{images}}" wx:key="index">
-                    <image style="width:180rpx;height:180rpx;margin:15rpx;" src="{{item}}"></image>
-                </view>
-                <view class="images-addimg" wx:if="{{images.length!=3}}" bindtap="addImage" hover="true" hover-class="images-addimg-hover">
-                    <image style="width:180rpx;height:180rpx;" src="../../images/addimg.png"></image>
-                </view>
-            </view>
-        </view> 
-        <picker bindchange="bindTypeChange" value="{{selectedType}}" range="{{type}}">
-            <view class="type" hover="true" hover-class="type-hover">
-                选择分类:{{type[selectedType]}}
-            </view>
-        </picker>
-        <button style="margin:30rpx;" type="primary" loading="{{submitting}}" disabled="{{submitting}}" form-type="submit">{{submitting ? '提交中...' : '提交'}}</button>
-    </form>
+<view class="container">
+<form bindsubmit= "formSubmiit">
+    <zan-panel class="form">
+    <zan-cell-group>
+        <zan-cell title="工程名称">
+            <zan-icon slot="icon" type="{{icon.projectName}}" />
+            <zan-field
+                id="project_name"
+                slot="footer"
+                bind:blur="onFieldBlur"
+                mode="{{field.mode}}"
+                right="{{field.right}}"
+                name="project_name" type="input" inputType="text" focus="{{field.focus}}" error="{{field.error}}" placeholder="工程名称"
+            />
+        </zan-cell>
+
+        <zan-cell id="project_type" title="工程类型" bindtap="openActionSheet">
+            <zan-icon slot="icon" type="{{icon.projectType}}" />
+            <view slot="footer">{{checkedProject}}</view>
+        </zan-cell>
+
+        <zan-cell title="工程地区">
+            <zan-icon slot="icon" type="{{icon.projectArea}}" />
+            <zan-field 
+                id="project_area" 
+                slot="footer" 
+                name="project_area" 
+                bind:blur="onFieldBlur"
+                mode="{{field.mode}}"
+                right="{{field.right}}"
+                type="input" 
+                inputType="text" 
+                focus:="{{field.focus}}" 
+                error="{{field.error}}" 
+                placeholder="工程地区"
+            />
+        </zan-cell>
+
+        <zan-cell>
+            <zan-row>
+                <zan-col offset="11" col="1">
+                    <zan-icon slot="icon" type="{{icon.projectIntro}}" />
+                </zan-col>
+            </zan-row>
+            <zan-row>
+                <zan-col offset="1" col="22" col-class="zan-col">
+                    <view class="content">
+                        <textarea placeholder-style="color:#b2b2b2;"
+                            id="project_intro"
+                            slot="footer"
+                            name="project_intro"
+                            placeholder="工程介绍"
+                            bind:blur="onTextareaBlur"
+                            auto-focus="{{texterea.autoFocus}}"
+                            auto-height="{{textarea.autoHeight}}"
+                            show-confirm-bar="{{textarea.showConfirmBar}}"
+                            adjust-position="{{texterea.adjustPosition}}"
+                        />
+                    </view>
+                </zan-col>
+            </zan-row>
+
+            <zan-row>
+                <view class="images">
+                    <view style="display:flex;">
+                        <view wx:for="{{images}}" wx:key="index">
+                            <image style="width:180rpx;height:180rpx;margin:15rpx;" src="{{item}}"></image>
+                        </view>
+                        <view class="images-addimg" wx:if="{{images.length!=3}}" bindtap="addImage" hover="true" hover-class="images-addimg-hover">
+                            <image style="width:180rpx;height:180rpx;" src="../../images/addimg.png"></image>
+                        </view>
+                    </view>
+                </view> 
+            </zan-row>
+        </zan-cell>
+
+        <zan-cell>
+            <zan-icon slot="icon" type="{{icon.projectContact}}" />
+            <zan-field
+                id="project_contact" 
+                slot="footer" 
+                name="project_contact" 
+                bind:blur="onFieldBlur"
+                mode="{{field.mode}}"
+                right="{{field.right}}"
+                type="input" 
+                inputType="text" 
+                focus:="{{field.focus}}" 
+                error="{{field.error}}" 
+                placeholder="联系人"
+            />
+        </zan-cell>
+
+        <zan-cell>
+            <zan-icon slot="icon" type="{{icon.projectPhone}}" />
+            <zan-field
+                id="project_phone" 
+                slot="footer" 
+                name="project_phone" 
+                bind:blur="onFieldBlur"
+                mode="{{field.mode}}"
+                right="{{field.right}}"
+                type="input" 
+                inputType="number" 
+                focus:="{{field.focus}}" 
+                error="{{field.error}}" 
+                placeholder="联系电话"
+            />
+        </zan-cell>
+
+        <zan-cell>
+            <zan-icon slot="icon" type="{{icon.projectMail}}" />
+            <zan-field
+                id="project_mail" 
+                slot="footer" 
+                name="project_mail" 
+                bind:blur="onFieldBlur"
+                mode="{{field.mode}}"
+                right="{{field.right}}"
+                type="input" 
+                inputType="text" 
+                focus:="{{field.focus}}" 
+                error="{{field.error}}" 
+                placeholder="电子邮箱"
+            />
+        </zan-cell>
+    </zan-cell-group>
+    <zan-button type="primary" form-type="submit">提交</zan-button>
+    </zan-panel>
+</form>
+<view class="actionsheet-container">
+    <zan-actionsheet
+        show="{{showAS}}"
+        actions="{{actions}}"
+        cancel-with-mask="{{cancelWithMask}}"
+        bind:actionclick="handleActionClick"
+        bind:cancel="closeActionSheet"
+    />
+</view>
 </view>

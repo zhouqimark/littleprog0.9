@@ -1,6 +1,4 @@
 <!--pages/login/login.wxml-->
-<import src="../../zanui/toptips/index.wxml" />
-<template is="zan-toptips" data="{{zanTopTips}}"></template>
 
 <form bindsubmit="formSubmit">
 <view class="page">

@@ -52,6 +52,7 @@ const isEmptyObject = obj => {
   }
   return !0;
 }
+
 module.exports = {
   formatTime: formatTime,
   checkSettingStatus: checkSettingStatus,

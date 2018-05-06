@@ -1,4 +1,5 @@
 @import '../login/login.wxss'
+@import '../../myui.wxss'
 
 .user {
   width: 725rpx;

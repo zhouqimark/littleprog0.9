@@ -1,4 +1,6 @@
 <!-- <import src="../login/login" /> -->
+<zan-toptips id="zan-toptips" content="{{ content }}" />
+
 <block wx:if="{{ showLoginPage }}">
     <include src="../login/login" />
 </block>

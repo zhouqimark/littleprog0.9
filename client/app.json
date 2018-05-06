@@ -2,11 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/infopublish/infopublish",
-    "pages/servlobby/servlobby",
-    "template/assists4group/assists4group",
-    "template/group2project/group2project",
-    "template/individual2job/individual2job",
-    "template/project2group/project2group"
+    "pages/servlobby/servlobby"
   ],
   "tabBar": {
     "list": [

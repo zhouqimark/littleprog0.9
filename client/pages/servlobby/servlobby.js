@@ -2,12 +2,12 @@ const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
 const msg = require("../../messages/normal");
 const util = require("../../utils/util");
-var Zan = require("../../zanui/index");
+const Toptips = require('../../zanui-weapp/dist/toptips/index');
 
 
 
 // pages/servlobby/servlobby.js
-Page(Object.assign(Zan.TopTips, {
+Page({
 
   /**
    * 页面的初始数据
@@ -168,13 +168,19 @@ Page(Object.assign(Zan.TopTips, {
     }
   },
 
+  showToptips(content) {
+    Toptips({
+      content: content
+    })
+  },
+
   formSubmit: function(e) {
     var infos = e.detail.value;
     if(!infos.name ||!infos.date || !infos.w_age || !infos.tel_number || !this.data.isAgree){
       //zanui
-      this.showZanTopTips("注册信息不全");
+      this.showToptips("注册信息不全");
     } else if( this.data.images.length !== 2) {
-      this.showZanTopTips("照片信息不全");
+      this.showToptips("照片信息不全");
     } else {
       var currCateg = this.data.currCateg === undefined ? this.data.categories[0] : this.data.currCateg;
       var currSubCateg = this.data.currSubCateg === undefined ? this.data.subCategories[0][0] : this.data.currSubCateg;
@@ -301,4 +307,4 @@ Page(Object.assign(Zan.TopTips, {
   onShareAppMessage: function () {
   
   }
-}))
+})

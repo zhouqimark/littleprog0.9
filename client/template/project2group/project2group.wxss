@@ -1,17 +1,9 @@
 /* template/project2group/project2group.wxss */
-.root{
-  font-family: simhei;
-  font-size: 34rpx;
-  color: #353535;
-  background: #eee;
-  height: 100vh;
+.zan-col {
+    background-color: #F8F8FF;
 }
 
-.content{
-    background: #fff;
-    border: 0.5rpx solid #eee;
-}
-
+/* 图片区域 */
 .images{
     background: #fff;
     margin: 20rpx 0 20rpx 0;
@@ -30,13 +22,6 @@
     background-size: 100% 100%;*/
 }
 
-.type{
-    padding: 15rpx;
-    background: #fff;
-    border: 0.5rpx solid #fff;
-}
-.type-hover{
-    padding: 15rpx;
-    background: #eee;
-    border: 0.5rpx solid #fff;
+.form {
+    margin:19rpx;
 }

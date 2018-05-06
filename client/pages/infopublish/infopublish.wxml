@@ -1,32 +1,19 @@
 <!--pages/infopublish/infopublish.wxml-->
-<view class="top-tab flex-wrp flex-tab " >
-  <view class="toptab flex-item {{currentNavTab==idx ? 'active' : ''}}" wx:for="{{navTab}}" wx:for-index="idx" wx:for-item="itemName" data-idx="{{idx}}" bindtap="switchTab">
-    {{itemName}}
+
+<zan-tab
+  list="{{ tab.list }}"
+  selected-id="{{ tab.selectedId }}"
+  scroll="{{tab.scroll}}"
+  fixed="{{tab.fixed}}"
+  bindtabchange="onTabChange"
+/>
+
+<view>
+  <view wx:if="{{currentNavTab === 'p2g'}}">
+    <include src="../../template/project2group/project2group.wxml" />
   </view>
+  <view wx:elif="{{currentNavTab === 'g2p'}}">2</view>
+  <view wx:elif="{{currentNavTab === 'i2j'}}">3</view>
+  <view wx:else>4</view>
+  
 </view>
-
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" current="{{currentNavTab}}" duration="{{duration}}">
-  <view class="ctnt0" hidden="{{currentNavTab==0 ? '' : true}}">
-    <swiper-item>
-        <text>1</text>
-    </swiper-item>
-  </view>
-    
-  <view class="ctnt1 placehold" hidden="{{currentNavTab==1 ? '' : true}}">
-    <swiper-item>
-        <text>2</text>
-    </swiper-item>
-  </view>
-
-  <view class="ctnt2 placehold" hidden="{{currentNavTab==2 ? '' : true}}">
-    <swiper-item>
-        <text>3</text>
-    </swiper-item>
-  </view>
-
-  <view class="ctnt3 placehold" hidden="{{currentNavTab==3 ? '' : true}}">
-    <swiper-item>
-        <text>4</text>
-    </swiper-item>
-  </view>
-</swiper>

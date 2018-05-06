@@ -1,1 +1,14 @@
-{}
+{
+    "usingComponents": {
+        "zan-field": "../../zanui-weapp/dist/field/index",
+        "zan-actionsheet": "../../zanui-weapp/dist/actionsheet/index",
+        "zan-button": "../../zanui-weapp/dist/btn/index",
+        "zan-row": "../../zanui-weapp/dist/row/index",
+        "zan-col": "../../zanui-weapp/dist/col/index",
+        "zan-cell": "../../zanui-weapp/dist/cell/index",
+        "zan-cell-group": "../../zanui-weapp/dist/cell-group/index",
+        "zan-tab": "../../zanui-weapp/dist/tab/index",
+        "zan-icon": "../../zanui-weapp/dist/icon/index",
+        "zan-panel": "../../zanui-weapp/dist/panel/index"
+    }
+}
