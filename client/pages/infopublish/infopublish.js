@@ -29,6 +29,16 @@ Page({
       right: true
     },
 
+    //picker
+    picker: {
+      dateStart: "2018-01-01",
+      dateEnd: "2018-01-01",
+      
+      types: ["持证焊工", "持证管理员", "持证钢筋技工", "手工翻样", "软件BIM翻样", "套丝工", "电焊工", "区域总管", "现场总代班", "专业下料工", "钢筋工普工", "临时帮工"],
+      index: 0
+    },
+    
+
     //texterea
     textereea: {
       autoFocus: true,
@@ -54,121 +64,138 @@ Page({
       }],
       scroll: true,
       fixed: false,
-      selectedId: 1
+      selectedId: "p2g"
     },
 
     //icon
     icon: {
-      projectName: "check",
-      projectType: "check",
-      projectArea: "check",
-      projectIntro: "edit",
-      projectContact: "check",
-      projectPhone: "check",
-      projectMail: "check"
+      project_name: "check",
+      project_type: "check",
+      project_area: "check",
+      project_intro: "edit",
+      project_contact: "check",
+      project_phone: "check",
+      project_mail: "check",
+
+      group_name: "check",
+      group_type: "check",
+      group_area: "check",
+      group_intro: "edit",
+      group_contact: "check",
+      group_phone: "check",
+      group_mail: "check",
+
+      assists_type: "check",
+      assists_date: "check",
+      assists_area: "check",
+      assists_amount: "check",
+      assists_salary: "check",
+      assists_contact: "check",
+      assists_phone: "check",
+      assists_experience: "edit",
+
+      individual_name: "check",
+      individual_age: "check",
+      individual_area: "check",
+      individual_salary: "check",
+      individual_type: "check",
+      individual_experience: "check"
     },
 
     //actionsheet
-    projects: ["开发商直接发包", "建筑公司分包", "大劳务分包", "实体劳务分包", "PC预制厂分包", "开票总承包分包", "开票劳务分包"],
-    checkedProject: "开发商直接发包",
+    checkedProject: "项目类型",
+    checkedGroup: "班组类型",
+    checkedAssists: "工种选择",
     showAS: false,
-    actions: [{
-      name: "开发商直接发包",
-      loading: false
-    }, {
-      name: "建筑公司分包",
-      loading: false
-    }, {
-      name: "大劳务分包",
-      loading: false
-    }, {
-      name: "实体劳务分包",
-      loading: false
-    }, {
-      name: "PC预制厂分包",
-      loading: false
-    }, {
-      name: "开票总承包分包",
-      loading: false
-    }, {
-      name: "开票劳务分包",
-      loading: false
-    }],
-    cancelWithMask: false,
-    cancelText: "取消",
-  
+    actions: {
+      project: [{
+        name: "开发商直接发包",
+        loading: false
+      }, {
+        name: "建筑公司分包",
+        loading: false
+      }, {
+        name: "大劳务分包",
+        loading: false
+      }, {
+        name: "实体劳务分包",
+        loading: false
+      }, {
+        name: "PC预制厂分包",
+        loading: false
+      }, {
+        name: "开票总承包分包",
+        loading: false
+      }, {
+        name: "开票劳务分包",
+        loading: false
+      }],
+
+      group: [{
+        name: "实力钢筋承包团队",
+        loading: false
+      }, {
+        name: "专业绑扎班组",
+        loading: false
+      }, {
+        name: "兄弟合抱班组",
+        loading: false
+      }, {
+        name: "料场专业包租",
+        loading: false
+      }, {
+        name: "止水钢板班组",
+        loading: false
+      }, {
+        name: "压力焊班组",
+        loading: false
+      }, {
+        name: "专业焊桩笼班组",
+        loading: false
+      }, {
+        name: "PC定型作业班",
+        loading: false
+      }, {
+        name: "桥梁专向作业班",
+        loading: false
+      }, {
+        name: "地铁钢筋作业班",
+        loading: false
+      }, {
+        name: "帮工突击队",
+        loading: false
+      }],
+
+    },
+    cancelWithMask: true,
   },
 
   onFieldBlur: function(e) {
     console.log(e)
-    const currentTarget = e.currentTarget;
+    const id = e.currentTarget.id;
     const val = e.detail.detail.value;
-    if (currentTarget.id === "project_name") {
-      if (val.length !== 0) {
-        this.setData({
-          "icon.projectName": "checked"
-        })
-      } else {
-        this.setData({
-          "icon.projectName": "check"
-        })
-      }
-    } else if (currentTarget.id === "project_area") {
-      if (val.length !== 0) {
-        this.setData({
-          "icon.projectArea": "checked"
-        })
-      } else {
-        this.setData({
-          "icon.projectArea": "check"
-        })
-      }
-    } else if (currentTarget.id === "project_contact") {
-      if(val.length !== 0) {
-        this.setData({
-          "icon.projectContact": "checked"
-        })
-      } else {
-        this.setData({
-          "icon.projectContact": "check"
-        })
-      }
-    } else if (currentTarget.id === "project_phone") {
-      if(val.length !== 0) {
-        this.setData({
-          "icon.projectPhone": "checked"
-        })
-      } else {
-        this.setData({
-          "icon.projectPhone": "check"
-        })
-      }
-    } else if (currentTarget.id === "project_mail") {
-      if(val.length !== 0) {
-        this.setData({
-          "icon.projectMail": "checked"
-        })
-      } else {
-        this.setData({
-          "icon.projectMail": "check"
-        })
-      }
+    var param = {};
+    var key = "icon."+id;
+    if(val.length !== 0) {
+      param[key] = "checked";
+      this.setData(param);
+    } else {
+      param[key] = "check";
+      this.setData(param)
     }
   },
 
   onTextareaBlur: function(e) {
-    const currentTarget = e.currentTarget;
-    const val = e.detail.value
-    if(currentTarget.id === "projcet_intro") {
-      if (val.length > 0) {
-        this.setData({
-          "icon.projectIntro": "records"
-        })
-      } else {
-        this.setData({
-          "icon.projectIntro": "edit"
-        })
-      }
+    const { value } = e.detail;
+    const id = e.currentTarget.id;
+    var param = {};
+    var key = "icon."+id;
+    if(value.length !== 0) {
+      param[key] = "records";
+      this.setData(param);
+    } else {
+      param[key] = "edit";
+      this.setData(param);
     }
   },
 
@@ -176,6 +203,41 @@ Page({
     this.setData({
       currentNavTab: e.detail
     })
+  },
+
+  onDateChange: function(e) {
+    const { value } = e.detail;
+    const extra = e.currentTarget.dataset.pass;
+    if(extra === "dateStart") {
+      this.setData({
+        "picker.dateStart": value
+      })
+    }
+    if(extra === "dateEnd") {
+      this.setData({
+        "picker.dateEnd": value
+      })
+    }
+  },
+
+  onTypeChange: function(e) {
+    console.log(e)
+    const { value } = e.detail;
+    const extra = e.currentTarget.dataset.pass;
+    var param = {}
+    if (extra === "assistsType") {
+      param = {
+        "picker.index": value,
+        "icon.assists_type": "checked"
+      }
+    }
+    if (extra === "individualType") {
+      param = {
+        "picker.index": value,
+        "icon.individual_type": "checked"
+      }
+    }
+    this.setData(param);
   },
 
   switchTab: function(e) {
@@ -192,13 +254,19 @@ Page({
   },
 
   handleActionClick: function(e) {
+    console.log(e)
     const index = e.detail.index;
-    const p = this.data.projects[index];
-    this.setData({
-      checkedProject: p,
-      showAS: false,
-      "icon.projectType": "checked"
-    })
+    const id = e.currentTarget.id;
+    const data = e.currentTarget.dataset.pass;
+    var param = {};
+    var icon = "icon."+id;
+    param[icon] = "checked"
+
+    var check = "checked"+data;
+    param[check] = this.data.actions[data.toLowerCase()][index].name;
+    param["showAS"] = false;
+    this.setData(param)
+    
   },
 
   closeActionSheet: function(e) {

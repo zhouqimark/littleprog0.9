@@ -1,9 +1,10 @@
 <view class="container">
-<form bindsubmit= "formSubmiit">
-    <zan-panel class="form">
+<form bindsubmit= "submitP2g">
     <zan-cell-group>
-        <zan-cell title="工程名称">
-            <zan-icon slot="icon" type="{{icon.projectName}}" />
+        <zan-row>
+        <zan-col offset="3" col="18">
+        <zan-cell>
+            <zan-icon slot="icon" type="{{icon.project_name}}" />
             <zan-field
                 id="project_name"
                 slot="footer"
@@ -13,14 +14,22 @@
                 name="project_name" type="input" inputType="text" focus="{{field.focus}}" error="{{field.error}}" placeholder="工程名称"
             />
         </zan-cell>
+        </zan-col>
+        </zan-row>
 
-        <zan-cell id="project_type" title="工程类型" bindtap="openActionSheet">
-            <zan-icon slot="icon" type="{{icon.projectType}}" />
+        <zan-row>
+        <zan-col offset="3" col="18">
+        <zan-cell bindtap="openActionSheet">
+            <zan-icon slot="icon" type="{{icon.project_type}}" />
             <view slot="footer">{{checkedProject}}</view>
         </zan-cell>
+        </zan-col>
+        </zan-row>
 
-        <zan-cell title="工程地区">
-            <zan-icon slot="icon" type="{{icon.projectArea}}" />
+        <zan-row>
+        <zan-col offset="3" col="18">
+        <zan-cell>
+            <zan-icon slot="icon" type="{{icon.project_area}}" />
             <zan-field 
                 id="project_area" 
                 slot="footer" 
@@ -35,11 +44,13 @@
                 placeholder="工程地区"
             />
         </zan-cell>
+        </zan-col>
+        </zan-row>
 
         <zan-cell>
             <zan-row>
                 <zan-col offset="11" col="1">
-                    <zan-icon slot="icon" type="{{icon.projectIntro}}" />
+                    <zan-icon slot="icon" type="{{icon.project_intro}}" />
                 </zan-col>
             </zan-row>
             <zan-row>
@@ -74,8 +85,10 @@
             </zan-row>
         </zan-cell>
 
+        <zan-row>
+        <zan-col offset="3" col="18">
         <zan-cell>
-            <zan-icon slot="icon" type="{{icon.projectContact}}" />
+            <zan-icon slot="icon" type="{{icon.project_contact}}" />
             <zan-field
                 id="project_contact" 
                 slot="footer" 
@@ -90,9 +103,13 @@
                 placeholder="联系人"
             />
         </zan-cell>
+        </zan-col>
+        </zan-row>
 
+        <zan-row>
+        <zan-col offset="3" col="18">
         <zan-cell>
-            <zan-icon slot="icon" type="{{icon.projectPhone}}" />
+            <zan-icon slot="icon" type="{{icon.project_phone}}" />
             <zan-field
                 id="project_phone" 
                 slot="footer" 
@@ -107,9 +124,13 @@
                 placeholder="联系电话"
             />
         </zan-cell>
+        </zan-col>
+        </zan-row>
 
+        <zan-row>
+        <zan-col offset="3" col="18">
         <zan-cell>
-            <zan-icon slot="icon" type="{{icon.projectMail}}" />
+            <zan-icon slot="icon" type="{{icon.project_mail}}" />
             <zan-field
                 id="project_mail" 
                 slot="footer" 
@@ -124,15 +145,22 @@
                 placeholder="电子邮箱"
             />
         </zan-cell>
+        </zan-col>
+        </zan-row>
     </zan-cell-group>
+    <zan-row>
+    <zan-col offset="3" col="18">
     <zan-button type="primary" form-type="submit">提交</zan-button>
-    </zan-panel>
+    </zan-col>
+    </zan-row>
 </form>
 <view class="actionsheet-container">
     <zan-actionsheet
+        id="project_type"
+        data-pass="Project"
         show="{{showAS}}"
-        actions="{{actions}}"
-        cancel-with-mask="{{cancelWithMask}}"
+        actions="{{actions.project}}"
+        cancel-with-mask="{{ cancelWithMask }}"
         bind:actionclick="handleActionClick"
         bind:cancel="closeActionSheet"
     />

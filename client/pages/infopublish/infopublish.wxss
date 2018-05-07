@@ -1,1 +1,3 @@
 @import '../../template/project2group/project2group.wxss'
+@import '../../template/group2project/group2project.wxss'
+@import '../../template/group2project/group2project.wxss'

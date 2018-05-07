@@ -1,2 +1,174 @@
 <!--template/group2project/group2project.wxml-->
-<text>template/group2project/group2project.wxml</text>
+<view class="container">
+    <form bindsubmit="submiteG3p">
+        <zan-cell-group>
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.group_name}}" />
+                <zan-field
+                    id="group_name" 
+                    slot="footer" 
+                    name="group_name" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="班组名称"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell bindtap="openActionSheet">
+                <zan-icon slot="icon" type="{{icon.group_type}}" />
+                <view slot="footer">{{checkedGroup}}</view>
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.group_area}}" />
+                <zan-field
+                    slot="footer"
+                    id="group_area" 
+                    slot="footer" 
+                    name="group_area" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="服务地区"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-cell>
+                <zan-row>
+                    <zan-col offset="11" col="1">
+                        <zan-icon slot="icon" type="{{icon.group_intro}}" />
+                    </zan-col>
+                </zan-row>
+                <zan-row>
+                    <zan-col offset="1" col="22" col-class="zan-col">
+                        <view class="content">
+                            <textarea placeholder-style="color:#b2b2b2;"
+                                id="group_intro"
+                                slot="footer"
+                                name="group_intro"
+                                placeholder="班组介绍"
+                                bind:blur="onTextareaBlur"
+                                auto-focus="{{texterea.autoFocus}}"
+                                auto-height="{{textarea.autoHeight}}"
+                                show-confirm-bar="{{textarea.showConfirmBar}}"
+                                adjust-position="{{texterea.adjustPosition}}"
+                            />
+                        </view>
+                    </zan-col>
+                </zan-row>
+                <zan-row>
+                    <view class="images">
+                        <view style="display:flex;">
+                            <view wx:for="{{images}}" wx:key="index">
+                                <image style="width:180rpx;height:180rpx;margin:15rpx;" src="{{item}}"></image>
+                            </view>
+                            <view class="images-addimg" wx:if="{{images.length!=3}}" bindtap="addImage" hover="true" hover-class="images-addimg-hover">
+                                <image style="width:180rpx;height:180rpx;" src="../../images/addimg.png"></image>
+                            </view>
+                        </view>
+                    </view> 
+                </zan-row>
+            </zan-cell>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.group_contact}}" />
+                <zan-field
+                    id="group_contact" 
+                    slot="footer" 
+                    name="group_contact" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="联系人"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18"> 
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.group_phone}}" />
+                <zan-field
+                    id="group_phone" 
+                    slot="footer" 
+                    name="group_phone" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="number" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="联系电话"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.group_mail}}" />
+                <zan-field
+                    id="group_mail" 
+                    slot="footer" 
+                    name="group_mail" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="电子邮箱"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+        </zan-cell-group>
+        <zan-row>
+        <zan-col offset="3" col="18">
+        <zan-button type="primary" form-type="submit">提交</zan-button>
+        </zan-col>
+        </zan-row>
+    </form>
+    <view class="actionsheet-container">
+    <zan-actionsheet
+        id="group_type"
+        data-pass="Group"
+        show="{{showAS}}"
+        actions="{{actions.group}}"
+        cancel-with-mask="{{ cancelWithMask }}"
+        bind:actionclick="handleActionClick"
+        bind:cancel="closeActionSheet"
+    />
+    </view>
+</view>

@@ -1,2 +1,135 @@
 <!--template/individual2job/individual2job.wxml-->
-<text>template/individual2job/individual2job.wxml</text>
+<view>
+    <form bindsubmit="submitI2j">
+        <zan-cell-group>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.individual_name}}" />
+                <zan-field
+                    slot="footer"
+                    id="individual_name" 
+                    slot="footer" 
+                    name="individual_name" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="姓名"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.individual_age}}" />
+                <zan-field
+                    id="individual_age" 
+                    slot="footer" 
+                    name="individual_age" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="number" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="年龄"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.individual_area}}" />
+                <zan-field
+                    id="individual_area" 
+                    slot="footer" 
+                    name="individual_area" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="工作区域"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18"> 
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.individual_salary}}" />
+                <zan-field
+                    id="individual_salary" 
+                    name="individual_salary" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="number" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="¥"
+                />
+                <zan-tag slot="footer" type="primary" disabled>元/一天</zan-tag>
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.individual_type}}" />
+                    <view slot="footer">
+                        <picker data-pass="individualType" range="{{picker.types}}" value="{{picker.index}}" bindchange="onTypeChange">
+                            <view>{{picker.types[picker.index]}}</view>
+                        </picker>
+                    </view>
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+            
+            <zan-cell>
+            <zan-row>
+                <zan-col offset="11" col="1">
+                    <zan-icon slot="icon" type="{{icon.assists_experience}}" />
+                </zan-col>
+            </zan-row>
+            <zan-row>
+                <zan-col offset="1" col="22" col-class="zan-col">
+                    <view class="content">
+                        <textarea placeholder-style="color:#b2b2b2;"
+                            id="assists_experience"
+                            slot="footer"
+                            name="assists_experience"
+                            placeholder="工作经验"
+                            bind:blur="onTextareaBlur"
+                            auto-focus="{{texterea.autoFocus}}"
+                            auto-height="{{textarea.autoHeight}}"
+                            show-confirm-bar="{{textarea.showConfirmBar}}"
+                            adjust-position="{{texterea.adjustPosition}}"
+                        />
+                    </view>
+                </zan-col>
+            </zan-row>
+            </zan-cell>
+        </zan-cell-group>
+        <zan-row>
+        <zan-col offset="3" col="18">
+        <zan-button type="primary" form-type="submit">提交</zan-button>
+        </zan-col>
+        </zan-row>
+    </form>
+</view>

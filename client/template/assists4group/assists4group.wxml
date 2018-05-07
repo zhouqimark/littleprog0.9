@@ -1,2 +1,198 @@
 <!--template/assists4group/assists4group.wxml-->
-<text>template/assists4group/assists4group.wxml</text>
+<view class="container">
+    <form bindsubmit="submitA4g">
+        <zan-cell-group>
+            
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.assists_type}}" />
+                    <view slot="footer">
+                        <picker data-pass="assistsType" range="{{picker.types}}" value="{{picker.index}}" bindchange="onTypeChange">
+                            <view>{{picker.types[picker.index]}}</view>
+                        </picker>
+                    </view>
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.assists_area}}" />
+                <zan-field
+                    slot="footer"
+                    id="assists_area" 
+                    slot="footer" 
+                    name="assists_area" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="工作地点范围"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+            
+            <zan-row>
+            <zan-col offset="3" col="22">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.assists_date}}" />
+                <zan-row>
+                <zan-col offset="2" col="8">
+                    <view>
+                        <picker data-pass="dateStart" mode="date" value="{{picker.dateStart}}" start="2018-01-01" end="3018-01-01" bindchange="onDateChange">
+                            <view class="picker">
+                                {{picker.dateStart}}
+                            </view>
+                        </picker>
+                    </view>
+                </zan-col>
+                <zan-col col="2">
+                    <zan-tag type="primary" disabled>至</zan-tag>
+                </zan-col>
+                <zan-col offset="1" col="8">
+                    <view>
+                        <picker data-pass="dateEnd" mode="date" value="{{picker.dateEnd}}" start="2018-01-01" end="3018-01-01" bindchange="onDateChange">
+                            <view class="picker">
+                                {{picker.dateEnd}}
+                            </view>
+                        </picker>
+                    </view>
+                </zan-col>
+                </zan-row>
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18"> 
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.assists_salary}}" />
+                <zan-field
+                    id="assists_salary" 
+                    name="assists_salary" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="number" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="¥"
+                />
+                <zan-tag slot="footer" type="primary" disabled>元/一天</zan-tag>
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.assists_amount}}" />
+                <zan-field
+                    id="assits_amount" 
+                    slot="footer" 
+                    name="assits_amount" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="总人数"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.assists_contact}}" />
+                <zan-field
+                    id="asssits_contact" 
+                    slot="footer" 
+                    name="asssits_contact" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="联系人"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+            
+            <zan-row>
+            <zan-col offset="3" col="18">
+            <zan-cell>
+                <zan-icon slot="icon" type="{{icon.assists_phone}}" />
+                <zan-field
+                    id="assits_phone" 
+                    slot="footer" 
+                    name="assits_phone" 
+                    bind:blur="onFieldBlur"
+                    mode="{{field.mode}}"
+                    right="{{field.right}}"
+                    type="input" 
+                    inputType="text" 
+                    focus:="{{field.focus}}" 
+                    error="{{field.error}}" 
+                    placeholder="联系电话"
+                />
+            </zan-cell>
+            </zan-col>
+            </zan-row>
+            
+            <zan-cell>
+            <zan-row>
+                <zan-col offset="11" col="1">
+                    <zan-icon slot="icon" type="{{icon.assists_experience}}" />
+                </zan-col>
+            </zan-row>
+            <zan-row>
+                <zan-col offset="1" col="22" col-class="zan-col">
+                    <view class="content">
+                        <textarea placeholder-style="color:#b2b2b2;"
+                            id="assists_experience"
+                            slot="footer"
+                            name="assists_experience"
+                            placeholder="工作经历"
+                            bind:blur="onTextareaBlur"
+                            auto-focus="{{texterea.autoFocus}}"
+                            auto-height="{{textarea.autoHeight}}"
+                            show-confirm-bar="{{textarea.showConfirmBar}}"
+                            adjust-position="{{texterea.adjustPosition}}"
+                        />
+                    </view>
+                </zan-col>
+            </zan-row>
+            </zan-cell>
+        </zan-cell-group>
+        <zan-row>
+        <zan-col offset="3" col="18">
+        <zan-button type="primary" form-type="submit">提交</zan-button>
+        </zan-col>
+        </zan-row>
+    </form>
+    <view class="actionsheet-container">
+    <zan-actionsheet
+        id="assists_type"
+        data-pass="Assists"
+        show="{{showAS}}"
+        actions="{{actions.assists}}"
+        cancel-with-mask="{{ cancelWithMask }}"
+        bind:actionclick="handleActionClick"
+        bind:cancel="closeActionSheet"
+    />
+    </view>
+</view>
