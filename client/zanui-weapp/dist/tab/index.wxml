@@ -33,7 +33,7 @@
   <view
     wx:for="{{ list }}"
     wx:key="id"
-    class="zan-tab__item {{ selectedId == item.id ? 'zan-tab__item--selected' : '' }}"
+    class="tab-class zan-tab__item {{ selectedId == item.id ? 'zan-tab__item--selected' : '' }}"
     data-item-id="{{ item.id }}"
     bindtap="_handleZanTabChange"
   >

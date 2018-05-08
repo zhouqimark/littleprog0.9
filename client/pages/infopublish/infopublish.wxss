@@ -1,3 +1,8 @@
 @import '../../template/project2group/project2group.wxss'
 @import '../../template/group2project/group2project.wxss'
-@import '../../template/group2project/group2project.wxss'
+@import '../../template/individual2job/individual2job.wxss'
+@import '../../template/assists4group/assists4group.wxss'
+
+.zan-tab {
+    background-color: #F0F8FF;
+}

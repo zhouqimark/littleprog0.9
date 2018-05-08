@@ -171,4 +171,9 @@
         bind:cancel="closeActionSheet"
     />
     </view>
+
+    <zan-toptips
+        id="zan-toptips"
+        content="{{ content }}"
+    />
 </view>

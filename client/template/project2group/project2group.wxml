@@ -117,7 +117,7 @@
                 bind:blur="onFieldBlur"
                 mode="{{field.mode}}"
                 right="{{field.right}}"
-                type="input" 
+                type="input"
                 inputType="number" 
                 focus:="{{field.focus}}" 
                 error="{{field.error}}" 
@@ -165,4 +165,9 @@
         bind:cancel="closeActionSheet"
     />
 </view>
+
+<zan-toptips
+  id="zan-toptips"
+  content="{{ content }}"
+/>
 </view>

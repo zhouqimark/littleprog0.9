@@ -2,6 +2,7 @@ const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
 const msg = require("../../messages/normal");
 const util = require("../../utils/util");
+const Toptips = require("../../zanui-weapp/dist/toptips/index");
 
 // pages/infopublish/infopublish.js
 Page({
@@ -32,7 +33,9 @@ Page({
     //picker
     picker: {
       dateStart: "2018-01-01",
+      pickedStart: false,
       dateEnd: "2018-01-01",
+      pickedEnd: false,
       
       types: ["持证焊工", "持证管理员", "持证钢筋技工", "手工翻样", "软件BIM翻样", "套丝工", "电焊工", "区域总管", "现场总代班", "专业下料工", "钢筋工普工", "临时帮工"],
       index: 0
@@ -60,7 +63,7 @@ Page({
         title: '个人找工作'
       }, {
         id: "a4g",
-        title: "棒棒棒团队"
+        title: "帮帮突击队"
       }],
       scroll: true,
       fixed: false,
@@ -176,12 +179,23 @@ Page({
     const val = e.detail.detail.value;
     var param = {};
     var key = "icon."+id;
-    if(val.length !== 0) {
-      param[key] = "checked";
+    
+    if(util.exist(["project_phone", "group_phone", "assists_phone"], id) && !util.checkPhone(parseInt(val))) {
+      this.showToptips("手机号码格式不正确")
+      param[key] = "check";
+      this.setData(param);
+    } else if(util.exist(["project_mail", "group_mail", "assists_mail"], id) && !util.checkEmail(val)) {
+      this.showToptips("邮件格式不正确");
+      param[key] = "check";
       this.setData(param);
     } else {
-      param[key] = "check";
-      this.setData(param)
+      if(val.length !== 0) {
+        param[key] = "checked";
+        this.setData(param);
+      } else {
+        param[key] = "check";
+        this.setData(param)
+      }
     }
   },
 
@@ -210,12 +224,19 @@ Page({
     const extra = e.currentTarget.dataset.pass;
     if(extra === "dateStart") {
       this.setData({
-        "picker.dateStart": value
+        "picker.dateStart": value,
+        "picker.pickedStart": true
       })
     }
     if(extra === "dateEnd") {
       this.setData({
-        "picker.dateEnd": value
+        "picker.dateEnd": value,
+        "picker.pickedEnd": true
+      })
+    }
+    if( this.data.picker.pickedStart && this.data.picker.pickedEnd) {
+      this.setData({
+        "icon.assists_date": "checked"
       })
     }
   },
@@ -289,10 +310,24 @@ Page({
     })
   },
 
+  //非监听函数
+  showToptips(content) {
+    Toptips(content);
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    try{
+      const userInfo = wx.getStorageSync("userInfo");
+      this.setData({
+        avatarUrl: userInfo.avatarUrl,
+        nickName: userInfo.nickName
+      })
+    } catch(e) {
+      console.log(e)
+    }
     /*
     qcloud.request({
       url: this.data.infoPublish,

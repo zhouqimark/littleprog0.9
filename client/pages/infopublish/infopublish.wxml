@@ -1,5 +1,6 @@
 <!--pages/infopublish/infopublish.wxml-->
 <zan-tab
+  tab-class="zan-tab"
   list="{{ tab.list }}"
   selected-id="{{ tab.selectedId }}"
   scroll="{{tab.scroll}}"

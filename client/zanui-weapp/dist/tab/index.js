@@ -1,5 +1,5 @@
 Component({
-  externalClasses: 'class',
+  externalClasses: ['class', 'tab-class'],
 
   properties: {
     scroll: {

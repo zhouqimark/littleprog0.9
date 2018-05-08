@@ -95,14 +95,14 @@
             <zan-cell>
                 <zan-icon slot="icon" type="{{icon.assists_amount}}" />
                 <zan-field
-                    id="assits_amount" 
+                    id="assists_amount" 
                     slot="footer" 
-                    name="assits_amount" 
+                    name="assists_amount" 
                     bind:blur="onFieldBlur"
                     mode="{{field.mode}}"
                     right="{{field.right}}"
                     type="input" 
-                    inputType="text" 
+                    inputType="number" 
                     focus:="{{field.focus}}" 
                     error="{{field.error}}" 
                     placeholder="总人数"
@@ -116,9 +116,9 @@
             <zan-cell>
                 <zan-icon slot="icon" type="{{icon.assists_contact}}" />
                 <zan-field
-                    id="asssits_contact" 
+                    id="assists_contact" 
                     slot="footer" 
-                    name="asssits_contact" 
+                    name="assists_contact" 
                     bind:blur="onFieldBlur"
                     mode="{{field.mode}}"
                     right="{{field.right}}"
@@ -137,14 +137,14 @@
             <zan-cell>
                 <zan-icon slot="icon" type="{{icon.assists_phone}}" />
                 <zan-field
-                    id="assits_phone" 
+                    id="assists_phone" 
                     slot="footer" 
-                    name="assits_phone" 
+                    name="assists_phone" 
                     bind:blur="onFieldBlur"
                     mode="{{field.mode}}"
                     right="{{field.right}}"
                     type="input" 
-                    inputType="text" 
+                    inputType="number" 
                     focus:="{{field.focus}}" 
                     error="{{field.error}}" 
                     placeholder="联系电话"
@@ -195,4 +195,9 @@
         bind:cancel="closeActionSheet"
     />
     </view>
+
+    <zan-toptips
+        id="zan-toptips"
+        content="{{ content }}"
+    />
 </view>

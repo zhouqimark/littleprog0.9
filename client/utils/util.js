@@ -53,9 +53,42 @@ const isEmptyObject = obj => {
   return !0;
 }
 
+//手机号正则验证
+const checkPhone = (number) => {
+  if(!(/^1[3|4|5|7|8][0-9]{9}$/.test(number))) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+const checkEmail = (mail) =>
+{
+	if (!(/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(mail))) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+//判断集合是否存在某个元素，只要集合实例支持forEach
+const exist = (set, element) => {
+  var res = false;
+  set.forEach( (elem) => {
+    if (elem===element) {
+      res = true
+    }
+  });
+
+  return res;
+}
+
 module.exports = {
   formatTime: formatTime,
   checkSettingStatus: checkSettingStatus,
   format_date: format_date,
-  isEmptyObject: isEmptyObject
+  isEmptyObject: isEmptyObject,
+  checkPhone: checkPhone,
+  checkEmail: checkEmail,
+  exist: exist
 }
