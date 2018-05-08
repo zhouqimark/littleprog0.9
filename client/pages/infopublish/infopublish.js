@@ -20,7 +20,11 @@ Page({
     additionInfo: false,
 
     //添加描述图片
-    images: [],
+    images: {
+      project_images: [],
+      group_images: [],
+      individual_images: []
+    },
 
     //field
     field: {
@@ -87,6 +91,7 @@ Page({
       group_contact: "check",
       group_phone: "check",
       group_mail: "check",
+      group_close: "close",
 
       assists_type: "check",
       assists_date: "check",
@@ -171,6 +176,7 @@ Page({
 
     },
     cancelWithMask: true,
+
   },
 
   onFieldBlur: function(e) {
@@ -298,14 +304,26 @@ Page({
 
   //添加图片
   addImage: function(e) {
+    const id = e.currentTarget.id;
     wx.chooseImage({
-      count: 6,
+      count: 3,
       sourceType: ["album", "camera"],
       success: res => {
-        const images = this.data.images.concat(res.tempFilePaths);
-        this.setData({
-          images: images
-        })
+        if(id === "project_images") {
+          this.setData({
+            "images.project_images": this.data.images.project_images.concat(res.tempFilePaths)
+          });
+        }
+        if(id === "group_images") {
+          this.setData({
+            "images.group_images": this.data.images.group_images.concat(res.tempFilePaths)
+          });
+        }
+        if(id === "individual_images") {
+          this.setData({
+            "images.individual_images": this.data.images.individual_images.concat(res.tempFilePaths)
+          });
+        }
       }
     })
   },

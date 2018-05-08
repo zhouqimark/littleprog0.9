@@ -80,13 +80,16 @@
                 <zan-row>
                     <view class="images">
                         <view style="display:flex;">
-                            <view wx:for="{{images}}" wx:key="index">
+                            <view wx:for="{{images.group_images}}" wx:key="index">
+                                <view class="img-close" bindtap="onCloseImg">  
+                                    <zan-icon type="close" /> 
+                                </view>
                                 <image style="width:180rpx;height:180rpx;margin:15rpx;" src="{{item}}"></image>
                             </view>
-                            <view class="images-addimg" wx:if="{{images.length!=3}}" bindtap="addImage" hover="true" hover-class="images-addimg-hover">
+                            <view id="group_images" class="images-addimg" wx:if="{{images.group_images.length!=3}}" bindtap="addImage" hover="true" hover-class="images-addimg-hover">
                                 <image style="width:180rpx;height:180rpx;" src="../../images/addimg.png"></image>
                             </view>
-                        </view>
+                        </view>  
                     </view> 
                 </zan-row>
             </zan-cell>

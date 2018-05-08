@@ -24,3 +24,12 @@
     justify-content: center;
     font-size: 23rpx;
 }
+
+/* 删除图片 */
+.img-close {
+    position: relative;
+    left: 178rpx;
+    width: 1rpx;
+    height: 1rpx;
+    opacity: .8;
+}
