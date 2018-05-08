@@ -75,7 +75,7 @@
                 <view class="images">
                     <view style="display:flex;">
                         <view wx:for="{{images.project_images}}" wx:key="index">
-                            <view class="img-close" bindtap="onCloseImg">  
+                            <view id="project_images" class="img-close" bindtap="onCloseImg">  
                                 <zan-icon type="close" /> 
                             </view>
                             <image style="width:180rpx;height:180rpx;margin:15rpx;" src="{{item}}"></image>

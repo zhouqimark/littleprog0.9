@@ -328,6 +328,31 @@ Page({
     })
   },
 
+  //删除照片
+  onCloseImg: function(e) {
+    const id = e.currentTarget.id;
+    const index = e.currentTarget.dataset.index;
+    if(id === "project_images") {
+      var key = "images.project_images";
+      var target = this.data.images.project_images;
+    }
+    if(id === "group_images") {
+      var key = "images.group_images";
+      var target = this.data.images.group_images;
+    }
+    if(id === "individual_images") {
+      var key = "images.individual_images";
+      var target = this.data.images.individual_images;
+    }
+    var rmImgs = target.splice(index, 1);
+    var leftImgs = this.data.images;
+    var param = {}
+    param[key] = target;
+    if(leftImgs) {
+      this.setData(param);
+    }
+  },
+
   //非监听函数
   showToptips(content) {
     Toptips(content);

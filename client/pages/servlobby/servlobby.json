@@ -2,6 +2,8 @@
     "navigationBarTitleText": "个人中心",
     "enablePullDownRefresh": true,
     "usingComponents": {
-        "zan-toptips": "../../zanui-weapp/dist/toptips/index"
+        "zan-toptips": "../../zanui-weapp/dist/toptips/index",
+        "zan-capsule": "../../zanui-weapp/dist/capsule/index",
+        "zan-icon": "../../zanui-weapp/dist/icon/index"
     }
 }
