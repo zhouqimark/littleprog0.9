@@ -2,6 +2,7 @@
 @import '../../myui.wxss'
 
 .user {
+  height: 290rpx;
   width: 725rpx;
   background: #ffffff;
   padding: 30rpx 25rpx 30rpx 0;
@@ -13,13 +14,13 @@
 .user .userinfo-avatar{
   flex: 1;
   display: inline-block;
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 80rpx;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 120rpx;
 }
 .user .user-info{
   flex: 5;
-  text-align: left;
+  text-align: center;
 }
 .user .user-info text{
   display: block;

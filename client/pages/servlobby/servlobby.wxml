@@ -6,18 +6,15 @@
 </block>
 <block wx:else>
 <view class="container more">
-  <view class="user flex-wrp" bindtap="doRegister">
+  <view class="user flex-wrp flex-tab" bindtap="doRegister">
     <view class="avatar flex-item">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     </view>
     <view class="user-info flex-item">
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <block wx:if="{{ showWelcomeTxt }}">
-        <text class="edit">你好</text>
-      </block>
-      <block wx:else>
-        <text class="edit">注册</text>
-      </block>
+      <view>
+        <zan-capsule type="danger" leftText="会员注册" rightText="尽享各种会员特权" />
+      </view>
     </view>
   </view>
 

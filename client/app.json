@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/infopublish/infopublish",
-    "pages/servlobby/servlobby"
+    "pages/servlobby/servlobby",
+    "pages/store/store",
+    "pages/search/search"
   ],
   "tabBar": {
     "list": [
@@ -17,6 +19,12 @@
         "text": "信息发布",
         "iconPath": "/images/ic_menu_sort_nor.png",
         "selectedIconPath": "/images/ic_menu_sort_pressed.png"
+      },
+      {
+        "pagePath": "pages/store/store",
+        "text": "建筑商城",
+        "iconPath": "/images/ic_menu_shoping_nor.png",
+        "selectedIconPath": "/images/ic_menu_shoping_pressed.png"
       },
       {
         "pagePath": "pages/servlobby/servlobby",
