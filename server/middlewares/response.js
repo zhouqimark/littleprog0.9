@@ -13,6 +13,7 @@ module.exports = async function (ctx, next) {
         // 如果写在 ctx.body 为空，则使用 state 作为响应
         ctx.body = ctx.body ? ctx.body : {
             code: ctx.state.code !== undefined ? ctx.state.code : 0,
+            message: ctx.state.message !== undefined ? ctx.state.message: "",
             data: ctx.state.data !== undefined ? ctx.state.data : {},
             registeredStatus: ctx.state.registeredStatus !== undefined ?ctx.state.registeredStatus : {},
             decryptedData: ctx.state.decryptedData !== undefined ? ctx.state.decryptedData : {}

@@ -7,7 +7,9 @@ var config = {
         requestUrl: `${host}/weapp/user`,
         infoPublish: `${host}/weapp/info`,
         decryptionUrl: `${host}/weapp/decryption`,
-        bannerUrl: `${host}/weapp/banner`
+        classifyUrl: `${host}/weapp/classify`,
+        goodsUrl: `${host}/weapp/goods`,
+        goodsSearchUrl: `${host}/weapp/goods/search/all`
     }
 }
 

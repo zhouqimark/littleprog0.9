@@ -4,7 +4,9 @@
     "pages/infopublish/infopublish",
     "pages/servlobby/servlobby",
     "pages/store/store",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/goods/detail/detail",
+    "pages/goods/list/list"
   ],
   "tabBar": {
     "list": [

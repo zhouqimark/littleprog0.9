@@ -3,7 +3,9 @@ const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
 const util = require("../../utils/util");
 
+
 Page({
+
   data: {
     images: [],
     activeIndex: 0,
@@ -14,23 +16,25 @@ Page({
     interval: 3000,
     duration: 1000,
     circular: !0,
-    goods: {},
+    goods: {
+      params: {}
+    },
     prompt: {
       hidden: !0,
     },
+
+    url: {
+      classifyUrl: config.service.classifyUrl,
+      goodsUrl: config.service.goodsUrl
+    }
   },
   swiperchange(e) {
     // console.log(e.detail.current)
   },
   onLoad() {
-    this.getBanners(["https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/b.jpg", "https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/1524373869089-BJS_FcY3M.jpg"]);
-    //this.getBanners("https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/1524373869089-BJS_FcY3M.jpg");
-    //this.banner = App.HttpResource('/banner/:id', { id: '@id' })
-    //this.goods = App.HttpResource('/goods/:id', { id: '@id' })
-    //this.classify = App.HttpResource('/classify/:id', { id: '@id' })
-
-    //this.getBanners()
-    //this.getClassify()
+    //this.getBanners(["https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/b.jpg", "https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/1524373869089-BJS_FcY3M.jpg"]);
+    this.getClassify();
+    
   },
   initData() {
     const type = this.data.goods.params && this.data.goods.params.type || ''
@@ -50,8 +54,8 @@ Page({
   },
   navigateTo(e) {
     console.log(e)
-    wx.navigateTo('', {
-      id: e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: "../goods/detail/detail?id=" + e.currentTarget.dataset.id
     })
   },
   search() {
@@ -89,31 +93,59 @@ Page({
       })
   },
   */
- /*
   getClassify() {
-    const activeIndex = this.data.activeIndex
+    const activeIndex = this.data.activeIndex;
 
-    // App.HttpService.getClassify({
-    //     page: 1, 
-    //     limit: 4, 
-    // })
-    this.classify.queryAsync({
-      page: 1,
-      limit: 4,
-    })
-      .then(res => {
-        const data = res.data
-        console.log(data)
-        if (data.meta.code == 0) {
+    qcloud.request({
+      url: this.data.url.classifyUrl,
+      method: "GET",
+      success: res => {
+        const data = res.data;
+        console.log(res.data)
+        if(res.data.code === 200) {
           this.setData({
             navList: data.data.items,
-            'goods.params.type': data.data.items[activeIndex]._id
+            "goods.params.type": data.data.items[activeIndex]._id
           })
-          this.onPullDownRefresh()
+
+          this.onPullDownRefresh();
         }
-      })
+      },
+      fail: err => {
+        console.log(err)
+      }
+    })
   },
-  */
+ 
+  getList() {
+    const goods = this.data.goods;
+    const params = goods.params;
+    const constr_url = this.data.url.goodsUrl + "?type=" + params.type + "&page=" + params.page + "&limit=" + params.limit; 
+
+    qcloud.request({
+      url: constr_url,
+      method: "GET",
+      success: res => {
+        const data = res.data;
+        console.log(data);
+        if(data.code === 200) {
+          data.data.items.forEach(n => {
+            const images = JSON.parse(n.images);
+            n.thumb_url = App.renderImage(images && images[0]);
+          })
+          goods.items = goods.items.concat(data.data.items);
+          goods.paginate = data.data.paginate;
+          goods.params.page = data.data.paginate.page;
+          goods.params.limit = data.data.paginate.limit;
+          this.setData({
+            goods: goods,
+            "prompt.hidden": goods.items.length
+          })
+          console.log(this.data.goods)
+        }
+      }
+    })
+  },
  /*
   getList() {
     const goods = this.data.goods
@@ -141,12 +173,16 @@ Page({
   onPullDownRefresh() {
     console.info('onPullDownRefresh')
     this.initData()
-    //this.getList()
+    this.getList()
   },
   onReachBottom() {
     console.info('onReachBottom')
     if (!this.data.goods.paginate.hasNext) return
-    //this.getList()
+    const pge = this.data.goods.params.page;
+    this.setData({
+      "goods.params.page": pge + 1
+    })
+    this.getList()
   },
   onTapTag(e) {
     const type = e.currentTarget.dataset.type
@@ -164,6 +200,6 @@ Page({
       activeIndex: index,
       goods: goods,
     })
-    //this.getList()
+    this.getList()
   },
 })

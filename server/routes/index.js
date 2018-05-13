@@ -1,3 +1,5 @@
+const models = require("../model/index");
+
 /**
  * ajax 服务路由集合
  */
@@ -20,7 +22,21 @@ router.get("/info", controllers.info);
 
 router.post("/decryption", validationMiddleware, controllers.decryption);
 
-router.get("/banner", controllers.banner);
+//*classify*
+router.get("/classify", controllers.classify.getAll);
+router.get("/classify/:id", controllers.classify.get);
+router.post("/classify", controllers.classify.post);
+router.put("/classify/:id", controllers.classify.put);
+router.delete("/classify/:id", controllers.classify.del);
+
+//*goods*
+router.get("/goods", controllers.goods.getAll);
+router.get("/goods/:id", controllers.goods.get);
+router.post("/goods", controllers.goods.post);
+router.put("/goods/:id", controllers.goods.put);
+router.delete("/goods/:id", controllers.goods.del);
+router.get("/goods/search/all", controllers.goods.search);
+
 
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中 /weapp/upload
