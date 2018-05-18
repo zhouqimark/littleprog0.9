@@ -6,9 +6,9 @@ const createTable = () => { mysql.schema.hasTable("goods").then(exists => {
             t.increments("_id").primary();
             t.string("name", 50);
             t.integer("types").unsigned();
-            t.foreign("types").references("classify.id");
+            t.foreign("types").references("classify._id");
             t.float("price");
-            t.string("remark", 50);
+            t.text("remark");
             t.specificType("images", "JSON").notNullable();
             t.date("create_at");
             t.date("update_at");

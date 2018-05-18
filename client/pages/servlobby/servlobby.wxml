@@ -6,7 +6,7 @@
 </block>
 <block wx:else>
 <view class="container more">
-  <view class="user flex-wrp flex-tab" bindtap="doRegister">
+  <view class="user flex-wrp flex-tab" bindtap="onMemChck">
     <view class="avatar flex-item">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     </view>
@@ -19,40 +19,25 @@
   </view>
 
   <view class="my">
-    <view class="my-item flex-wrp">
+    <view class="my-item flex-wrp" wx:for="{{items}}" wx:key="" data-path="{{item.path}}" data-index="{{index}}" bindtap="navigateTo">
       <view class="myitem-icon flex-item" >
-        <image src="../../images/eye.png"></image>
+        <image src="{{item.icon}}"></image>
       </view>
       <view class="myitem-name flex-item">
-        <text>我的收藏</text>
+        <text>{{item.text}}</text>
       </view>
     </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/star.png"></image>
-      </view>
-      <view class="myitem-name flex-item">
-        <text>我的发布</text>
-      </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/draft.png"></image>
-      </view>
-      <view class="myitem-name flex-item">
-        <text>我的评论/回复</text>
-      </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/recent.png"></image>
-      </view>
-      <view class="myitem-name flex-item">
-        <text>我的订单</text>
-      </view>
-    </view>
-    <button open-type="getUserInfo" bindgetuserinfo="doLogin">获取授权</button>
+  </view>
 
+  <view class="my">
+    <view class="my-item flex-wrp" wx:for="{{setting}}" wx:key="" data-path="{{item.path}}">
+      <view class="myitem-icon flex-item" >
+        <image src="{{item.icon}}"></image>
+      </view>
+      <view class="myitem-name flex-item">
+        <text>{{item.text}}</text>
+      </view>
+    </view>
   </view>
 </view>
 </block>

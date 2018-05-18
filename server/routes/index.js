@@ -1,4 +1,4 @@
-const models = require("../model/index");
+
 
 /**
  * ajax 服务路由集合
@@ -16,7 +16,8 @@ const { auth: { authorizationMiddleware, validationMiddleware } } = require('../
 // 登录接口 /weapp/login
 router.get('/login', authorizationMiddleware, controllers.login)
 // 用户信息接口（可以用来验证登录态） /weapp/user
-router.post('/user/:category/:subCategory', validationMiddleware, controllers.user)
+router.post('/user/:category/:subCategory', validationMiddleware, controllers.user.memberUser)
+router.post("/user/normal", controllers.user.normalUser);
 
 router.get("/info", controllers.info);
 
@@ -36,6 +37,15 @@ router.post("/goods", controllers.goods.post);
 router.put("/goods/:id", controllers.goods.put);
 router.delete("/goods/:id", controllers.goods.del);
 router.get("/goods/search/all", controllers.goods.search);
+
+/**cart */
+router.get("/cart/:user", controllers.cart.getAll);
+router.get("/cart/:user/:id", controllers.cart.get);
+router.post("/cart", controllers.cart.post);
+router.put("/cart/:user/:id", controllers.cart.put);
+router.delete("/cart/:user/:id", controllers.cart.del);
+router.post("/cart/clear/:user", controllers.cart.clear);
+
 
 
 // --- 图片上传 Demo --- //

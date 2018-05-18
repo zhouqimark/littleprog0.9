@@ -9,7 +9,8 @@ App({
   onShow() {},
   onHide() {},
   globalData: {
-    userInfo: null
+    userMember: wx.getStorageSync("userMember") || null,
+    userNormal: wx.getStorageSync("userNormal") || null
   },
 
   renderImage(path) {

@@ -1,12 +1,17 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/login",
     "pages/infopublish/infopublish",
     "pages/servlobby/servlobby",
     "pages/store/store",
     "pages/search/search",
     "pages/goods/detail/detail",
-    "pages/goods/list/list"
+    "pages/goods/list/list",
+    "pages/order/detail/detail",
+    "pages/order/confirm/confirm",
+    "pages/order/list/list",
+    "pages/cart/cart"
   ],
   "tabBar": {
     "list": [

@@ -1,57 +1,164 @@
 /* pages/login/login.wxss */
-.user-avatar {
-    width: 128rpx;
-    height: 128rpx;
-    margin: 20rpx;
-    max-height: 200rpx;
-    min-height: 10rpx;
-    max-width: 200rpx;
-    min-width: 10rpx;
-
-    border-radius: 50%;
-    border-width: 30rpx;
-    border-color: beige;
-    border-style: solid;
-
-    /* 图片居中显示 */
-    margin-left: auto; 
-    margin-right: auto; 
-    display: block;
+.login-container {
+	height: 100%;
+	padding: 10px 30px;
+	background: #fff;
 }
 
-.user-nickname {
-    display: flex;
-    justify-content: center;
-    font-size: 23rpx;
+.app-info {
+	position: relative;
+	padding: 20px;
+	text-align: center;
 }
 
-/* 上传照片区域 */
-.images-area {
-  padding: 40rpx 0;
+.app-info:after {
+	content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #E5E5E5;
+    color: #E5E5E5;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
 }
 
-.images-tool {
-  display: flex;
-  align-items: center;
+.app-info .app-logo {
+	display: block;
+	width: 64px;
+	height: 64px;
+	margin: 10px auto;
+	border-radius: 4px;
 }
 
-.images {
-  display: flex;
-  align-items: center;
-  margin-top: 40rpx;
+.app-info .app-name {
+	font-weight: bold;
+	font-size: 18px;
+	color: #000;
 }
 
-.image-wrap {
-  width: 31%;
-  margin-right: 10rpx;
+.alert {
+	margin: 20px 0 30px;
 }
 
-.image {
-  flex: 1;
-  height: 200rpx;
-  width: 100%;
+.alert .alert-title {
+	font-weight: 400;
+	font-size: 16px;
+	color: #000;
+	margin-bottom: 10px;
 }
 
-.image-remover {
-  text-align: center;
+.alert-desc {
+	display: block;
+    list-style: disc inside none;
+}
+
+.alert .alert-text {
+	display: list-item;
+    text-align: -webkit-match-parent;
+	font-size: 14px;
+	color: #999;
+}
+
+.logged {
+	margin-top: 100px;
+}
+
+.logged .logged-icon {
+	display: block;
+	width: 64px;
+	height: 64px;
+	margin: 20px auto;
+}
+
+.logged .logged-text {
+	font-size: 14px;
+	color: #000;
+	text-align: center;
+	margin: 10px 0;
+}
+
+/* 会员卡片 */
+.trump{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+.PicBg{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.PicBg image{
+    width:100%;
+    height:100%;
+    filter:blur(15px);
+}
+
+.title{
+    width:100%;
+    text-align:center;
+    color:#fff;
+    margin:10px 0 40px 0;
+    position:relative;
+    z-index:10;
+}
+
+.content{
+    z-index:10;
+    position:relative;
+    width:100%;
+    height:490px;
+}
+
+.content swiper{
+    height:100%;
+
+}
+
+.content swiper .swiper-item{
+    text-align:center;
+    position:relative;
+    height:300px;  
+    width:70%;
+    margin:0 auto;
+}
+
+.content swiper .swiper-item .contMess{
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    width:100%;
+    color:#fff;
+    font-size:13px; 
+    text-align:left;
+    background-color:rgba(0,0,0,0.3);
+    padding:5px 0;
+    text-indent:5px;
+}
+
+.content swiper .swiper-item .contMess text{
+    display:block;
+    margin-top:5px;
+}
+
+.content swiper .swiper-item image{
+    width:100%;
+    height:300px;
+    border-radius: 5px;
+}
+
+.content swiper .swiper-item .contMess .Mess2{
+    font-size:12px;
+    color:#888;
+}
+.Bannerswiper{
+    height:175px;
 }

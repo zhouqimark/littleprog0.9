@@ -1,4 +1,5 @@
 {
+    "navigationBarTitleText": "信息发布",
     "usingComponents": {
         "zan-field": "../../zanui-weapp/dist/field/index",
         "zan-actionsheet": "../../zanui-weapp/dist/actionsheet/index",

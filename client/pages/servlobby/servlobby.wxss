@@ -1,4 +1,4 @@
-@import '../login/login.wxss'
+
 @import '../../styles/myui.wxss'
 
 .user {

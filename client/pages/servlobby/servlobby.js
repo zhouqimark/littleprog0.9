@@ -4,6 +4,8 @@ const msg = require("../../messages/normal");
 const util = require("../../utils/util");
 const Toptips = require('../../zanui-weapp/dist/toptips/index');
 
+const App = getApp();
+
 
 
 // pages/servlobby/servlobby.js
@@ -13,55 +15,106 @@ Page({
    * 页面的初始数据;
    */
   data: {
-    userInfo: {},
+    userInfo: {
+      avatarUrl: "../../images/avatar.png",
+      nickName: util.format_date(new Date())
+    },
+
+    items: [{
+      icon: "../../images/eye.png",
+      text: "我的收藏",
+      path: ""
+    }, {
+      icon: "../../images/star.png",
+      text: "我的发布",
+      path: ""
+    }, {
+      icon: "../../images/draft.png",
+      text: "我的评论/回复",
+      path: ""
+    }, {
+      icon: "../../images/recent.png",
+      text: "我的订单",
+      path: "../order/list/list"
+    }, {
+      icon: "../../images/cart.png",
+      text: "我的购物车",
+      path: "../cart/cart"
+    }],
+
+    setting: [{
+      icon: "../../images/clearstorage.png",
+      text: "清除缓存",
+      path: ""
+    }, {
+      icon: "../../images/aboutus.png",
+      text: "关于我们",
+      path: ""
+    }, ],
     showLoginPage: false,
     showWelcomeTxt: false,
     registeredStatus: {},
     isAgree: true,
     date: util.format_date(new Date()),
-    categories: ["企业类", "班组类", "个人", "材料商"],
-    subCategories: [
-      ["开发商直接发包", "建筑公司分包", "大劳务分包", "实体劳务分包", "PC预制厂分包", "开票总承包分包", "开票劳务分包"],
-      ["实力钢筋承包团队", "专业绑扎班组", "兄弟合抱班组", "料场专业包租", "止水钢板班组", "压力焊班组", "专业焊桩笼班组", "PC定型作业班", "桥梁专向作业班", "地铁钢筋作业班", "帮工突击队"],
-      ["持证焊工", "持证管理员", "持证钢筋技工", "手工翻样", "软件BIM翻样", "套丝工", "电焊工", "区域总管", "现场总代班", "专业下料工", "钢筋工普工", "临时帮工"],
-      ["名称", "广告宣传页"]
-    ],
-    showSubCateg: ["开发商直接发包", "建筑公司分包", "大劳务分包", "实体劳务分包", "PC预制厂分包", "开票总承包分包", "开票劳务分包"],
     images: [],
     uploadPercent: 0
   },
 
-  //事件监听函数
-  doLogin: function() {
-    msg.showBusy("努力加载中");
-    const that = this; 
-    qcloud.login({
-      success(userInfo) {
-        console.log("加载成功", userInfo);
-        that.setData({ userInfo: userInfo });
-        msg.hideBusy();
-        try {
-          wx.setStorageSync("userInfo", userInfo);
-        } catch(e) {
-          msg.showModal("ERROR", "存储信息失败，请重试");
-        }
-      },
-  
-      fail(error) {
-        //msg.showModal("登陆失败", error);
-        console.log("登陆失败", error);
-        msg.hideBusy();
-      }
+  onMemChck(e) {
+    wx.navigateTo({
+      url: "/pages/login/login"
     })
   },
 
-  doRegister: function(e) {
-    const registeredStatus = this.data.registeredStatus;
+  //事件监听函数
+
+  doRegister: function() {
+    qcloud.request({
+      url: config.service.normalUserUrl,
+      login: false,
+      method:"POST",
+      header: {
+        "Content-Type": "application/json"
+      },
+
+      data: {
+        nickName: this.data.userInfo.nickName
+      },
+
+      success: res => {
+        console.log(res);
+        if(res.data.code === 200){
+          msg.showSuccess(res.data.message);
+          try {
+            wx.setStorageSync("userNormal", res.data.data);
+            App.globalData.normalUserUrl = res.data.data;
+          } catch (e) {
+            msg.showWarning("存储cookie失败");
+          }
+        }
+
+        if(res.data.code === 400){
+          msg.showSuccess(res.data.message);
+        }
+      },
+
+      fail: err => {
+        console.log(err);
+      }
+    });
+    /* const registeredStatus = this.data.registeredStatus;
     if (util.isEmptyObject(registeredStatus)) {
       this.setData({ showLoginPage: true });
       wx.showToast({ title: "下拉返回页面", icon: "none" });
-    }
+    } */
   },
+
+  navigateTo(e) {
+    wx.navigateTo({
+      url: e.currentTarget.dataset.path
+    })
+  },
+
 
   bindAgreeChange: function(e) {
     this.setData({
@@ -250,7 +303,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    try {
+      const userNormal = App.globalData.userNormal;
+      console.log(userNormal);
+      if(!userNormal) {
+        this.doRegister();
+      } else {
+        this.setData({
+          "userInfo.nickName": userNormal.name
+        })
+      }
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   /**

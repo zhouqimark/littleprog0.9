@@ -3,6 +3,7 @@
  const models = require("../model/index");
  
  const getAll = async (ctx, next) => {
+    
     const page = Number(ctx.request.query.page) || 1;
     const limit = Number(ctx.request.query.limit) || 10;
     const query = {};
@@ -40,26 +41,33 @@
 
  }
 
- const get = async (ctx, next) => {
-     const query = {
-         _id: ctx.params.id
-     }
+const get = async (ctx, next) => {
+    const id = ctx.params.id;
 
-     try {
-         const ret = await mysql("goods").innerJoin("classify", "goods.types", "classify._id").where(query).select();
-         if(!ret) {
-             ctx.state.code = 400;
-             ctx.state.message = "资源不存在或已删除";
-             ctx.state.data = {};
-         }
 
-         ctx.state.code = 200;
-         ctx.state.message = "调用成功";
-         ctx.state.data = ret[0];
-     } catch (err) {
-         console.log(err);
-     }
- }
+    try {
+         /*const ret = await mysql("goods")
+                            .join("classify", () => {
+                                this.on("goods.types", "=", "classify._id")
+                            })
+                            .select("goods._id as _id", "goods.name as name", "goods.price as price", "goods.remark as remark", "goods.types as types", "goods.create_at as create_at", "goods.update_at as update_at", "classify.name as classify_name"); */
+        const ret = await mysql.raw( `select goods._id as _id, goods.name as name, goods.price as price,
+                                    goods.remark as remark, goods.types as types, goods.images as images, 
+                                    goods.create_at as create_at, goods.update_at as update_at, classify.name as classify_name
+                                    from goods join classify on goods.types = classify._id where goods._id = ?`,  id);
+        if(!ret) {
+            ctx.state.code = 400;
+            ctx.state.message = "资源不存在或已删除";
+            ctx.state.data = {};
+        }
+
+        ctx.state.code = 200;
+        ctx.state.message = "调用成功";
+        ctx.state.data = ret[0][0];
+    } catch (err) {
+        console.log(err);
+    }
+}
 
  const post = async (ctx, next) => {
     const body = {

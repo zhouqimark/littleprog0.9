@@ -1,6 +1,6 @@
 <!--pages/login/login.wxml-->
 
-<form bindsubmit="formSubmit">
+<!-- <form bindsubmit="formSubmit">
 <view class="page">
   <view class="page_hd">
     <view class>
@@ -69,12 +69,11 @@
 
     <view class="images-area">
 
-      <!-- 添加图片按钮  -->
       <view class="images-tool">
         <button type="default" size="mini" bindtap="chooseImg" wx:if="{{images.length < 3}}">上传身份证正反照</button>
       </view>
 
-      <!-- 图片缩略图  -->
+      
       <view class="images">
         <block wx:for="{{images}}" wx:key="*this">
           <view class="image-wrap weui-uploader__file weui-uploader__file_status">
@@ -103,4 +102,41 @@
     </view>
   </view>
 </view>
-</form>
+</form> -->
+
+
+<view>
+	<view class="login-container login" wx:if="{{ !logged }}">
+		<view class="app-info">
+			<image class="app-logo" src="/images/membership.png" />
+			<text class="app-name">尊贵会员</text>
+		</view>
+		<view class="alert">
+			<view class="alert-title">请确认授权以下信息</view>
+			<view class="alert-desc">
+				<view class="alert-text">获得你的公开信息（昵称、头像等）</view>
+			</view>
+		</view>
+		<button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="doLogin">确认登录</button>
+	</view>
+	<view class="content trump logged" wx:else>
+		<image class="logged-icon" src="" />
+    <swiper indicator-dots="{{false}}" class="Bannerswiper">
+            <block>
+                <swiper-item>
+                    <view class="swiper-item">
+                        <navigator>
+                            <view class="itemCont">
+                                <image src="../../images/vipbg.png" />
+                                <view class="contMess">
+                                    <text class="Mess1">hi</text>
+                                    <text class="Mess2">test</text>
+                                </view>
+                            </view>
+                        </navigator>
+                    </view>
+                </swiper-item>
+            </block>
+    </swiper>
+  </view>
+</view>

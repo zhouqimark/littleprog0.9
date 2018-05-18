@@ -1,4 +1,6 @@
-module.exports = async (ctx, next) => {
+const { mysql } = require("../qcloud");
+
+const memberUser = async (ctx, next) => {
     // 通过 Koa 中间件进行登录态校验之后
     // 登录信息会被存储到 ctx.state.$wxInfo
     // 具体查看：
@@ -53,4 +55,38 @@ module.exports = async (ctx, next) => {
     } else {
         ctx.state.code = -1
     }
+
+    await next();
+}
+
+const normalUser = async (ctx, next) => {
+    const name = ctx.request.body.nickName;
+    const body = {
+        name: name
+    }
+
+    try {
+        const ret = await mysql("user").returning("_id").insert(body);
+        const feedValue = {
+            _id: ret[0],
+            name: name
+        }
+        if(!ret) {
+            ctx.state.code = 400;
+            ctx.state.message = "注册失败";
+            cxt.state.data = null;
+        } else {
+            ctx.state.code = 200;
+            ctx.state.message = "注册成功";
+            ctx.state.data = feedValue;
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    await next();
+}
+
+module.exports = {
+    memberUser,
+    normalUser
 }

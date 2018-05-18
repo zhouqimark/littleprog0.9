@@ -1,4 +1,6 @@
 <!--pages/infopublish/infopublish.wxml-->
+<zan-row>
+<zan-col offset="2">
 <zan-tab
   tab-class="zan-tab"
   list="{{ tab.list }}"
@@ -7,6 +9,8 @@
   fixed="{{tab.fixed}}"
   bindtabchange="onTabChange"
 />
+</zan-col>
+</zan-row>
 
 <view>
   <view wx:if="{{currentNavTab === 'p2g'}}">

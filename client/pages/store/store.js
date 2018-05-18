@@ -32,7 +32,7 @@ Page({
     // console.log(e.detail.current)
   },
   onLoad() {
-    //this.getBanners(["https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/b.jpg", "https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/1524373869089-BJS_FcY3M.jpg"]);
+    this.getBanners(["https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/b.jpg", "https://wximg-1256514917.cos.ap-guangzhou.myqcloud.com/1524373869089-BJS_FcY3M.jpg"]);
     this.getClassify();
     
   },
