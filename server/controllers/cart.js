@@ -108,7 +108,7 @@ const post = async (ctx, next) => {
             }
     
             ctx.state.code = 200;
-            ctx.state.message = "调用成功";
+            ctx.state.message = "新增成功";
             ctx.state.data = {
                 _id: body.goods
             }
