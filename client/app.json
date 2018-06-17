@@ -11,7 +11,9 @@
     "pages/order/detail/detail",
     "pages/order/confirm/confirm",
     "pages/order/list/list",
-    "pages/cart/cart"
+    "pages/cart/cart",
+    "pages/address/list/list",
+    "pages/address/confirm/confirm"
   ],
   "tabBar": {
     "list": [

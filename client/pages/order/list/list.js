@@ -1,3 +1,6 @@
+const qcloud = require("../../../vendor/wafer2-client-sdk/index")
+const config = require("../../../config")
+
 const App = getApp()
 
 Page({
@@ -11,9 +14,12 @@ Page({
             title: '您还没有相关的订单',
             text: '可以去看看有哪些想买的',
         },
+
+        url: {
+            orderUrl: config.service.orderUrl
+        }
     },
     onLoad() {
-        //this.order = App.HttpResource('/order/:id', {id: '@id'})
         this.setData({
             navList: [
                 {
@@ -59,30 +65,39 @@ Page({
     },
     navigateTo(e) {
         console.log(e)
-        wx.navigateTo('/pages/order/detail/index', {
-            url: e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: '/pages/order/detail/index?id=' + e.currentTarget.dataset.id
         })
     },
     getList() {
         const order = this.data.order
         const params = order.params
+        const user = App.globalData.userNormal._id || wx.getStorageSync("userNormal")._id;
 
-        // App.HttpService.getOrderList(params)
-        //this.order.queryAsync(params)
-        /* .then(res => {
-            const data = res.data
-            console.log(data)
-            if (data.meta.code == 0) {
-                order.items = [...order.items, ...data.data.items]
-                order.paginate = data.data.paginate
-                order.params.page = data.data.paginate.next
-                order.params.limit = data.data.paginate.perPage
-                this.setData({
-                    order: order,
-                    'prompt.hidden': order.items.length,
-                })
+        const constr_url = this.data.url.orderUrl + "/" + user + "?page=" + this.data.order.params.page + "&limit=" + this.data.order.params.limit + "&type=" + this.data.order.params.type;
+
+        qcloud.request({
+            url: constr_url,
+            method: "GET",
+            success: res => {
+                const data = res.data;
+                console.log(data);
+
+                if(data.code === 200) {
+                    data.data.items.map(n => {
+                        n.items = JSON.parse(n.items)
+                    });
+                    order.items = [...order.items, ...data.data.items]
+                    order.paginate = data.data.paginate;
+                    order.params.page = data.data.paginate.page;
+                    order.params.limit = data.data.paginate.limit;
+                    this.setData({
+                        order: order,
+                        "prompt.hidden": order.items.length
+                    })
+                }
             }
-        }) */
+        })
     },
     onPullDownRefresh() {
         console.info('onPullDownRefresh')
@@ -92,6 +107,10 @@ Page({
     onReachBottom() {
         console.info('onReachBottom')
         if (!this.data.order.paginate.hasNext) return
+        const pge = this.data.order.params.page;
+        this.setData({
+          "order.params.page": pge + 1
+        })
         this.getList()
     },
     onTapTag(e) {

@@ -1,1 +1,1 @@
-/* pages/order/detail/detail.wxss */
+@import '../../../styles/mymail.wxss'

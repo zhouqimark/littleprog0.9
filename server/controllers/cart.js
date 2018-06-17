@@ -19,6 +19,7 @@ const getAll = async (ctx, next) => {
             pretty_feed.push({
                 _id: item._id,
                 goods: {
+                    goods_id: item.goods_id,
                     name: item.goods_name,
                     remark: item.goods_remark,
                     price: item.goods_price,

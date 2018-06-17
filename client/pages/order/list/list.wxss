@@ -1,5 +1,4 @@
-/* pages/order/list/list.wxss */
-@import '../../../styles/mymail.wxss'
+@import '../../../styles/prompt.wxss'
 
 .scroll-list {
     overflow: hidden;

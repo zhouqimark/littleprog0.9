@@ -6,7 +6,7 @@
 <template is="prompt" data="{{ prompt }}"/>
 
 <view class="scroll-list">
-    <view class="weui-form-preview" wx:if="{{ !!order.paginate.total }}" wx:for="{{ order.items }}" wx:key="" bindtap="navigateTo" data-id="{{ item._id }}">
+    <view class="weui-form-preview" wx:if="{{ order.items.length>0 }}" wx:for="{{ order.items }}" wx:key="" bindtap="navigateTo" data-id="{{ item._id }}">
         <view class="weui-form-preview__hd">
             <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">订单总价</view>

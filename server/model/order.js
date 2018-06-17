@@ -8,9 +8,11 @@ const createTable = () => {
                 t.integer("totalAmount");
                 t.integer("payAmount");
                 t.date("payTime");
+                t.string("status", 50).defaultTo("submitted")
                 t.string("recipientName", 50);
                 t.string("recipientGender", 50);
                 t.string("recipientTel", 50);
+                t.string("recipientAddress", 50);
                 t.specificType("items", "JSON");
                 t.integer("user_id").references("user._id");
                 t.date("create_at");

@@ -1,66 +1,151 @@
-// pages/order/confirm/confirm.js
+const qcloud = require("../../../vendor/wafer2-client-sdk/index")
+const config = require("../../../config")
+const App = getApp()
+
 Page({
+    data: {
+        hidden: !0,
+        carts: {},
+        address: {
+            item: {},
+        },
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-  
-  },
+        url: {
+            defaultAddressUrl: config.service.defaultAddressUrl,
+            addressUrl: config.service.addressUrl,
+            orderUrl: config.service.orderUrl
+        }
+    },
+    onLoad(option) {
+        if(option){
+            console.log(option)
+            this.setData({
+                address_id: option.id
+            })
+        }
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
+        const carts = {
+            items: wx.getStorageSync('confirmOrder'),
+            totalAmount: 0, 
+        }
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
+        carts.items.forEach(n => carts.totalAmount+=n.totalAmount)
+        
+        this.setData({
+            carts: carts
+        })
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
+        console.log(this.data.carts)
+    },
+    onShow() {
+        const address_id = this.data.address_id
+        if (address_id) {
+            this.getAddressDetail(address_id)
+        } else {
+            this.getDefalutAddress()
+        }
+    },
+    redirectTo(e) {
+        console.log(e)
+        wx.redirectTo({
+          url: "/pages/address/confirm/confirm?ret=" + JSON.stringify(this.data.address)
+        })
+    },
+    getDefalutAddress() {
+        qcloud.request({
+            url: this.data.url.defaultAddressUrl + "/" + this.data.carts.items[0].user,
+            method: "GET",
+            success: res => {
+                const data = res.data
+                console.log(data)
+                if(data.code === 200) {
+                    this.setData({
+                        address_id: data.data._id,
+                        "address.item": data.data
+                    })
+                } else {
+                    this.showModal()
+                }
+            }
+        })
+    },
+    showModal() {
+        wx.showModal({
+            title: '友情提示', 
+            content: '没有收货地址，请先设置', 
+            success: res => {
+                console.log(res)
+                if (res.confirm == 1) {
+                    wx.redirectTo({
+                        url: '/pages/address/add/add'
+                    })
+                } else {
+                    wx.navigateBack()
+                }
+            }
+        })
+    },
+    getAddressDetail(id) {
+        const detailAddressUrl = this.data.url.addressUrl + "/" + this.data.carts.items[0].user + "/" + id;
+        qcloud.request({
+            url: detailAddressUrl,
+            method: "GET",
+            success: res => {
+                const data = res.data;
+                console.log(data);
+                if(data.code === 200) {
+                    this.setData({
+                        "address.item": data.data
+                    })
+                }
+            }
+        })
+    },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+    addOrder() {
+        const address_id = this.data.address_id
+        const params = {
+            items: [],
+            address_id: address_id
+        }
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+        this.data.carts.items.forEach(n =>{
+            params.items.push({
+                id: n.goods.goods_id,
+                total: n.total
+            })
+        })
+        console.log(params);
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
+        const constr_url = this.data.url.orderUrl + "/" + this.data.carts.items[0].user;
+        qcloud.request({
+            url: constr_url,
+            method:"POST",
+            data: params,
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+            success: res => {
+                const data = res.data;
+                console.log(data)
+                if(data.code === 200) {
+                    this.setData({
+                        order_id: data.data._id
+                    })
+                    wx.redirectTo({
+                        url: "/pages/order/detail/detail?id=" + data.data._id + "&user=" + this.data.carts.items[0].user
+                    })
+                }
+            }
+        })
+    },
+    clear() {
+        const constr_url = this.data.url.orderUrl + "/" + this.data.carts.items[0].user + "/" + this.data.order_id;
+        qcloud.request({
+            url: constr_url,
+            method: "DELETE",
+            success: res => {
+                const data = res.data;
+                console.log(data);
+            }
+        })
+    },
 })

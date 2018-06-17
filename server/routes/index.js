@@ -47,6 +47,24 @@ router.delete("/cart/:user/:id", controllers.cart.del);
 router.post("/cart/clear/:user", controllers.cart.clear);
 
 
+// address
+router.get("/address/default/:user", controllers.address.getDefault);
+router.post("/address/default/:user/:id", controllers.address.setDefault)
+router.get("/address/:user", controllers.address.getAll)
+router.get("/address/:user/:id/", controllers.address.get)
+router.post("/address", controllers.address.post)
+router.put("/address/:user/:id", controllers.address.put)
+router.delete("/address/:user/:id", controllers.address.del)
+
+
+//order
+router.get("/order/:user", controllers.order.getAll);
+router.get("/order/:user/:id", controllers.order.get);
+router.post("/order/:user", controllers.order.post);
+router.put("/order/:user/:id", controllers.order.put);
+router.delete("/order/:user/:id", controllers.order.del);
+
+
 
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中 /weapp/upload

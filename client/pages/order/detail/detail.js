@@ -1,66 +1,40 @@
-// pages/order/detail/detail.js
+const qcloud = require("../../../vendor/wafer2-client-sdk/index")
+const config = require("../../../config")
+
 Page({
+    data: {
+        order: {
+            item: {},
+        },
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+        url: {
+          orderUrl: config.service.orderUrl
+        }
+    },
+    onLoad(option) {
+      this.setData({
+          id: option.id,
+          user_id: option.user
+      })
+    },
+    onShow() {
+        this.getOrderDetail(this.data.user_id, this.data.id)
+    },
+    getOrderDetail(user, id) {
+      const constr_url = this.data.url.orderUrl + "/" + user + "/" + id;
+      qcloud.request({
+        url: constr_url,
+        method: "GET",
+        success: res => {
+          const data = res.data;
+          console.log(data);
+          if(data.code === 200) {
+            data.data.items = JSON.parse(data.data.items);
+            this.setData({
+              "order.item": data.data
+            })
+          }
+        }
+      })
+    }
 })

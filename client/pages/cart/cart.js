@@ -57,11 +57,12 @@ Page({
             data.data.forEach(n => {
               const images = JSON.parse(n.goods.images);
               n.goods.thumb_url = App.renderImage(images && images[0]);
-              this.setData({
-                "carts.items": data.data,
-                "prompt.hidden": data.data.length
-              })
             });
+
+            this.setData({
+              "carts.items": data.data,
+              "prompt.hidden": data.data.length
+            })
           }
         }
       })
@@ -79,7 +80,7 @@ Page({
         console.log(e)
         wx.setStorageSync('confirmOrder', this.data.carts.items)
         wx.navigateTo({
-          url: '/pages/order/confirm/index'
+          url: '/pages/order/confirm/confirm?'
         })
     },
     del(e) {

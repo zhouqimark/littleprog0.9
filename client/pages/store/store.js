@@ -77,22 +77,6 @@ Page({
       })
     }
   },
-  /*
-  getBanners() {
-    // App.HttpService.getBanners({is_show: !0})
-    this.banner.queryAsync({ is_show: !0 })
-      .then(res => {
-        const data = res.data
-        console.log(data)
-        if (data.meta.code == 0) {
-          data.data.items.forEach(n => n.path = App.renderImage(n.images[0].path))
-          this.setData({
-            images: data.data.items
-          })
-        }
-      })
-  },
-  */
   getClassify() {
     const activeIndex = this.data.activeIndex;
 
@@ -146,30 +130,6 @@ Page({
       }
     })
   },
- /*
-  getList() {
-    const goods = this.data.goods
-    const params = goods.params
-
-    // App.HttpService.getGoods(params)
-    this.goods.queryAsync(params)
-      .then(res => {
-        const data = res.data
-        console.log(data)
-        if (data.meta.code == 0) {
-          data.data.items.forEach(n => n.thumb_url = App.renderImage(n.images[0] && n.images[0].path))
-          goods.items = [...goods.items, ...data.data.items]
-          goods.paginate = data.data.paginate
-          goods.params.page = data.data.paginate.next
-          goods.params.limit = data.data.paginate.perPage
-          this.setData({
-            goods: goods,
-            'prompt.hidden': goods.items.length,
-          })
-        }
-      })
-  },
-  */
   onPullDownRefresh() {
     console.info('onPullDownRefresh')
     this.initData()

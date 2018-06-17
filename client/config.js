@@ -12,7 +12,10 @@ var config = {
         goodsUrl: `${host}/weapp/goods`,
         goodsSearchUrl: `${host}/weapp/goods/search/all`,
         cartUrl: `${host}/weapp/cart`,
-        cartClearUrl: `${host}/weapp/cart/clear`
+        cartClearUrl: `${host}/weapp/cart/clear`,
+        defaultAddressUrl: `${host}/weapp/address/default`,
+        addressUrl: `${host}/weapp/address`,
+        orderUrl: `${host}/weapp/order`
     }
 }
 
