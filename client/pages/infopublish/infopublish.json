@@ -13,6 +13,7 @@
         "zan-panel": "../../zanui-weapp/dist/panel/index",
         "zan-tag": "../../zanui-weapp/dist/tag/index",
         "zan-toptips": "../../zanui-weapp/dist/toptips/index",
-        "zan-steps": "../../zanui-weapp/dist/steps/index"
+        "zan-steps": "../../zanui-weapp/dist/steps/index",
+        "zan-switch": "../../zanui-weapp/dist/switch/index"
     }
 }

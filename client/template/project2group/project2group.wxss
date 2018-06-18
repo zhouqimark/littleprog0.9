@@ -30,3 +30,7 @@
     height: 1rpx;
     opacity: .8;
 }
+
+switch {
+    transform:scale(0.7) !important; 
+}

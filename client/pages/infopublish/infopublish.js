@@ -114,7 +114,10 @@ Page({
     checkedProject: "项目类型",
     checkedGroup: "班组类型",
     checkedAssists: "工种选择",
+    checkedPaymentDays: "1天",
+    paymentPrice: "¥9.8",
     showAS: false,
+    showASForPayment: false,
     actions: {
       project: [{
         name: "开发商直接发包",
@@ -173,6 +176,17 @@ Page({
         name: "帮工突击队",
         loading: false
       }],
+
+      paymentdays: [{
+        name: "1天",
+        loading: false
+      }, {
+        name: "2天",
+        loading: false
+      }, {
+        name: "3天",
+        loading: false
+      }]
 
     },
     cancelWithMask: true,
@@ -280,17 +294,35 @@ Page({
     })
   },
 
+  openPaymentSheet: function(e) {
+    this.setData({
+      showASForPayment: true
+    })
+  },
+
   handleActionClick: function(e) {
     console.log(e)
     const index = e.detail.index;
-    const id = e.currentTarget.id;
+    const id = e.currentTarget.id || "";
     const data = e.currentTarget.dataset.pass;
     var param = {};
-    var icon = "icon."+id;
-    param[icon] = "checked"
+    if(id){
+      var icon = "icon."+id;
+      param[icon] = "checked"
+    }
 
     var check = "checked"+data;
     param[check] = this.data.actions[data.toLowerCase()][index].name;
+    if(data === "PaymentDays") {
+      if(index === 0) {
+        param["paymentPrice"] = "¥9.8"
+      } else if(index === 1) {
+        param["paymentPrice"] = "¥58.8"
+      } else {
+        param["paymentPrice"] = "88.8"
+      }
+    }
+    param["showASForPayment"] = false;
     param["showAS"] = false;
     this.setData(param)
     
@@ -353,6 +385,19 @@ Page({
     }
   },
 
+  handlePayment: function(e) {
+    const checked = e.detail.value;
+    if(!checked){
+      this.setData({
+        payOn: false
+      })
+    } else {
+      this.setData({
+        payOn: true
+      })
+    }
+  },
+
   //非监听函数
   showToptips(content) {
     Toptips(content);
@@ -371,33 +416,6 @@ Page({
     } catch(e) {
       console.log(e)
     }
-    /*
-    qcloud.request({
-      url: this.data.infoPublish,
-      login: true,
-      method: "GET",
-      success: result => {
-        if(result.data.data.status === 0){
-          wx.redirectTo({
-            url: "/pages/login/login",
-          });
-        } else {
-          msg.showSuccess("欢迎回来 " + wx.getStorageSync("userInfo").nickName);
-        }
-      },
-
-      fail: err => {
-        console.log(err);
-      }
-    })
-    */
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
 
   /**

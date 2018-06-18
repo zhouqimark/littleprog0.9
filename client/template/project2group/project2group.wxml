@@ -151,6 +151,45 @@
         </zan-col>
         </zan-row>
     </zan-cell-group>
+    
+    <zan-cell-group>
+    <zan-row>
+    <zan-col offset="3" col="18">
+    <zan-cell title="置顶 🔝 推广">
+    <switch
+        slot="footer"
+        bind:change="handlePayment"
+    />
+    </zan-cell>
+    </zan-col>
+    </zan-row>
+
+    <view wx:if="{{payOn}}">
+    <zan-row>
+    <zan-col offset="3" col="18">
+    <zan-cell 
+        title="置顶天数"
+        value="{{checkedPaymentDays}}"
+        onlyTapFooter=true
+        isLink="true"
+        bind:tap="openPaymentSheet"
+    >
+    </zan-cell>
+    </zan-col>
+    </zan-row>
+
+    <zan-row>
+    <zan-col offset="3" col="18">
+    <zan-cell
+        title="价格"
+    >
+    <text class="zan-c-red" slot="footer">{{paymentPrice}}</text>
+    </zan-cell>
+    </zan-col>
+    </zan-row>
+    </view>
+    </zan-cell-group>
+
     <zan-row>
     <zan-col offset="3" col="18">
     <zan-button type="primary" form-type="submit">提交</zan-button>
@@ -163,6 +202,17 @@
         data-pass="Project"
         show="{{showAS}}"
         actions="{{actions.project}}"
+        cancel-with-mask="{{ cancelWithMask }}"
+        bind:actionclick="handleActionClick"
+        bind:cancel="closeActionSheet"
+    />
+</view>
+
+<view class="actionsheet-container">
+    <zan-actionsheet
+        data-pass="PaymentDays"
+        show="{{showASForPayment}}"
+        actions="{{actions.paymentdays}}"
         cancel-with-mask="{{ cancelWithMask }}"
         bind:actionclick="handleActionClick"
         bind:cancel="closeActionSheet"
