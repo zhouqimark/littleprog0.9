@@ -5,53 +5,37 @@ const memberUser = async (ctx, next) => {
     // 登录信息会被存储到 ctx.state.$wxInfo
     // 具体查看：
     if (ctx.state.$wxInfo.loginState === 1) {
-        // loginState 为 1，登录态校验成功
-        var name = ctx.request.body.name || "";
-        var date = ctx.request.body.date || "";
-        var wAge = ctx.request.body.wAge || "";
-        var telNumber = ctx.request.body.telNumber || "";
-        var coType = {
-            main: ctx.params.category,
-            minor: ctx.params.subCategory
-        };
-        var userData = {
-            name: name,
-            date: date,
-            wAge: wAge,
-            telNumber: telNumber,
-            coType: coType,
-            registered: true
-        };
-
-        var registeredStatus = {
-            name: name,
-            telNumber: telNumber,
-            registered: true
+        const user_id = Number(ctx.params.user);
+        const update_at = mysql.fn.now();
+        const name = ctx.state.$wxInfo.userinfo.nickName;
+        const avatar = ctx.state.$wxInfo.userinfo.avatarUrl;
+        const query = {
+            _id: user_id
         }
-        //status代表信息录入状态1:success 0:failed
-        ctx.state.registeredStatus = registeredStatus;
-        ctx.state.data = userData;
-        ctx.state.code = 200;
 
-        //model.sync();
-        //model.User.create(userData);
-
-        /*
-        User = model.User;
-        var exit = User.findAll({
-            where: {
-                tel_number: telNumber
+        const body = {
+            name: name,
+            avatar: avatar,
+            member_ship: 1,
+            update_at: update_at
+        }
+        try{
+            const ret = await mysql("user").where(query).update(body);
+            const feedValue = await mysql("user").where(query).select();
+            
+            if(!feedValue[0]) {
+                ctx.state.code = 400;
+                ctx.state.message = "会员注册失败";
+                ctx.state.data = null;
+            } else {
+                ctx.state.code = 200;
+                ctx.state.message = "你好，会员";
+                ctx.state.data = feedValue[0];
             }
-        })
-        if(exit) {
-            ctx.state.code = 200;
-        } else {
-            var user = await User.create(userDdate);
-            db.sync();
-            ctx.sate.userData = userData;
-            ctx.state.code = 400;
+        } catch (err) {
+            ctx.state.message = err;
+            console.log(err);
         }
-        */
     } else {
         ctx.state.code = -1
     }
@@ -60,9 +44,11 @@ const memberUser = async (ctx, next) => {
 }
 
 const normalUser = async (ctx, next) => {
-    const name = ctx.request.body.nickName;
+    const name = new Date().getTime().toString();
+    const create_at = mysql.fn.now();
     const body = {
-        name: name
+        name: name,
+        create_at: create_at
     }
 
     try {
@@ -77,11 +63,12 @@ const normalUser = async (ctx, next) => {
             cxt.state.data = null;
         } else {
             ctx.state.code = 200;
-            ctx.state.message = "注册成功";
+            ctx.state.message = "欢迎";
             ctx.state.data = feedValue;
         }
     } catch (err) {
         console.log(err);
+        ctx.state.message = err;
     }
     await next();
 }

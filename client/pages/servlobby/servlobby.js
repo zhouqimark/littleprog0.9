@@ -1,7 +1,7 @@
 const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
+const utils = require("../../utils/util");
 const msg = require("../../messages/normal");
-const util = require("../../utils/util");
 const Toptips = require('../../zanui-weapp/dist/toptips/index');
 
 const App = getApp();
@@ -15,10 +15,7 @@ Page({
    * 页面的初始数据;
    */
   data: {
-    userInfo: {
-      avatarUrl: "../../images/avatar.png",
-      nickName: util.format_date(new Date())
-    },
+    userInfo: {},
 
     items: [{
       icon: "../../images/eye.png",
@@ -55,7 +52,7 @@ Page({
     showWelcomeTxt: false,
     registeredStatus: {},
     isAgree: true,
-    date: util.format_date(new Date()),
+    date: utils.format_date(new Date()),
     images: [],
     uploadPercent: 0
   },
@@ -67,47 +64,6 @@ Page({
   },
 
   //事件监听函数
-
-  doRegister: function() {
-    qcloud.request({
-      url: config.service.normalUserUrl,
-      login: false,
-      method:"POST",
-      header: {
-        "Content-Type": "application/json"
-      },
-
-      data: {
-        nickName: this.data.userInfo.nickName
-      },
-
-      success: res => {
-        console.log(res);
-        if(res.data.code === 200){
-          msg.showSuccess(res.data.message);
-          try {
-            wx.setStorageSync("userNormal", res.data.data);
-            App.globalData.normalUserUrl = res.data.data;
-          } catch (e) {
-            msg.showWarning("存储cookie失败");
-          }
-        }
-
-        if(res.data.code === 400){
-          msg.showSuccess(res.data.message);
-        }
-      },
-
-      fail: err => {
-        console.log(err);
-      }
-    });
-    /* const registeredStatus = this.data.registeredStatus;
-    if (util.isEmptyObject(registeredStatus)) {
-      this.setData({ showLoginPage: true });
-      wx.showToast({ title: "下拉返回页面", icon: "none" });
-    } */
-  },
 
   navigateTo(e) {
     wx.navigateTo({
@@ -303,19 +259,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    try {
-      const userNormal = App.globalData.userNormal;
-      console.log(userNormal);
-      if(!userNormal) {
-        this.doRegister();
-      } else {
-        this.setData({
-          "userInfo.nickName": userNormal.name
-        })
-      }
-    } catch (err) {
-      console.log(err);
-    }
   },
 
   /**
@@ -329,8 +272,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var avatarUrl = "../../images/avatar.png";
+    if(App.globalData.user && App.globalData.user.avatar !== undefined) {
+      avatarUrl = App.globalData.user.avatar;
+    }
     
-    util.checkSettingStatus();
+    this.setData({
+      "userInfo.avatarUrl": avatarUrl,
+      "userInfo.nickName": App.globalData.user.name
+    })
+    utils.checkSettingStatus();
     
   },
 

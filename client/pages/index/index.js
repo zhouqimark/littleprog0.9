@@ -1,6 +1,6 @@
-//index.js
+      //index.js
 //获取应用实例
-const app = getApp()
+const App = getApp()
 
 const qcloud = require("../../vendor/wafer2-client-sdk/index");
 const config = require("../../config");
@@ -13,6 +13,15 @@ Page({
   },
 
   onLoad: function(opts) {
+    try {
+      const user = App.globalData.user;
+      console.log(user || "用户初始化");
+      if(!user) {
+        App.doRegister();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -25,7 +34,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

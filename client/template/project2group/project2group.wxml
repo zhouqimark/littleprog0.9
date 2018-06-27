@@ -1,5 +1,5 @@
 <view class="container">
-<form bindsubmit= "submitP2g">
+<form bindsubmit="handleSubmitP2g">
     <zan-cell-group>
         <zan-row>
         <zan-col offset="3" col="18">
@@ -7,11 +7,12 @@
             <zan-icon slot="icon" type="{{icon.project_name}}" />
             <zan-field
                 id="project_name"
+                name="project_name"
                 slot="footer"
                 bind:blur="onFieldBlur"
                 mode="{{field.mode}}"
                 right="{{field.right}}"
-                name="project_name" type="input" inputType="text" focus="{{field.focus}}" error="{{field.error}}" placeholder="工程名称"
+                type="input" inputType="text" focus="{{field.focus}}" error="{{field.error}}" placeholder="工程名称"
             />
         </zan-cell>
         </zan-col>
@@ -158,7 +159,7 @@
     <zan-cell title="置顶 🔝 推广">
     <switch
         slot="footer"
-        bind:change="handlePayment"
+        bind:change="turnPayOn"
     />
     </zan-cell>
     </zan-col>
@@ -192,10 +193,11 @@
 
     <zan-row>
     <zan-col offset="3" col="18">
-    <zan-button type="primary" form-type="submit">提交</zan-button>
+    <button type="primary" form-type="submit">提交</button>
     </zan-col>
     </zan-row>
-</form>
+
+
 <view class="actionsheet-container">
     <zan-actionsheet
         id="project_type"
@@ -223,4 +225,5 @@
   id="zan-toptips"
   content="{{ content }}"
 />
+</form>
 </view>

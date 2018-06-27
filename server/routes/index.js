@@ -16,10 +16,12 @@ const { auth: { authorizationMiddleware, validationMiddleware } } = require('../
 // 登录接口 /weapp/login
 router.get('/login', authorizationMiddleware, controllers.login)
 // 用户信息接口（可以用来验证登录态） /weapp/user
-router.post('/user/:category/:subCategory', validationMiddleware, controllers.user.memberUser)
-router.post("/user/normal", controllers.user.normalUser);
+router.post('/user/member/:user', validationMiddleware, controllers.user.memberUser)
+router.get("/user/normal", controllers.user.normalUser);
 
-router.get("/info", controllers.info);
+//*information*
+router.get("/information", controllers.information.get);
+router.post("/information", controllers.information.post)
 
 router.post("/decryption", validationMiddleware, controllers.decryption);
 

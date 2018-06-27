@@ -8,9 +8,9 @@ App = getApp();
 
 Page({
   data: {
-    userMember: {},
-    logged: false
-
+    user: {},
+    logged: false,
+    url: config.service.memberUserUrl
   },
 
   doLogin: function() {
@@ -22,14 +22,21 @@ Page({
 
         console.log("加载成功", userMember);
         that.setData({
-          userMember: userMember,
+          user: userMember,
           logged: true
         });
-        try {
+
+        const constr_url = {
+          url: that.data.url + "/" + App.globalData.user._id
+        }
+        Object.assign(userMember, constr_url);
+        App.syncUserInfo(Object.assign(userMember));
+
+        /* try {
           wx.setStorageSync("userMember", userMember);
         } catch(e) {
           msg.showModal("ERROR", "存储信息失败，请重试");
-        }
+        } */
       },
   
       fail(error) {
@@ -42,7 +49,7 @@ Page({
  
   onLoad: function (options) {
     try {
-      var value = App.globalData.userMember || wx.getStorageSync("userMember");
+      const value = App.globalData.user.member_ship;
       if(value) {
         wx.setNavigationBarTitle({
           title: "会员中心"
@@ -52,6 +59,7 @@ Page({
         })
       }
     } catch (e) {
+      console.log(e)
       wx.showModal({
         title: "提示",
         content: "获取缓存失败，近期无登录活动",

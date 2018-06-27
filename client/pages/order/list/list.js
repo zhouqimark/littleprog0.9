@@ -72,7 +72,7 @@ Page({
     getList() {
         const order = this.data.order
         const params = order.params
-        const user = App.globalData.userNormal._id || wx.getStorageSync("userNormal")._id;
+        const user = App.globalData.user._id || wx.getStorageSync("user")._id;
 
         const constr_url = this.data.url.orderUrl + "/" + user + "?page=" + this.data.order.params.page + "&limit=" + this.data.order.params.limit + "&type=" + this.data.order.params.type;
 

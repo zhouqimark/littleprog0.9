@@ -9,9 +9,42 @@
       </swiper-item>
     </swiper>
   </view>
-  <view></view>
-  <view></view>
-  <view></view>
-  <span class="weui-badge">left</span>
-  <span class="weui-badge">right</span>
+  
+
+  <scroll-view scroll-y="true" class="container" lower-threshold="5" bindscrolltolower="lower">
+    <block wx:for="{{infomatiions}}">
+        <view class="feed-item">
+            <view class="feed-source">
+                <a>
+                    <view class="avatar">
+                        <image src="{{item.profile_image}}"></image>
+                    </view>
+                    <text>{{item.name}}</text>
+                </a>
+                <text class="item-more">{{item.create_time}}</text>
+            </view>
+            <view class="feed-content">
+                <view class="answer-body">
+                    <view bindtap="bindItemTap">
+                        <text class="answer-txt" aid="{{info_id}}">{{item.text}}</text>
+                    </view>
+                    <view class="answer-actions" bindtap="bindItemTap">
+                        <view class="eye dot">
+                          <a>{{items.eye}}</a>
+                        </view>
+                        <view class="commment dot">
+                          <a>{{items.comment}}</a>
+                        </view>
+                        <view class="like dot">
+                            <a>{{item.love}} 顶</a>
+                        </view>
+                        <view class="share dot">
+                            <a>{{item.share}} 分享 </a>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+  </scroll-view>
 </view>

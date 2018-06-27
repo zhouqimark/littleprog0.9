@@ -5,10 +5,13 @@ const createTable = () => { mysql.schema.hasTable("user").then(exists => {
         return mysql.schema.createTable("user", t => {
             t.increments("_id").primary();
             t.string("name", 50);
+            t.text("avatar");
+            t.string("area", 50);
             t.string("tel", 50);
-            t.integer("report_numbers").defaultTo(0);
-            t.boolean("block_list").defaultTo(false);
-            t.boolean("membership").defaultTo(false);
+            t.string("email", 50);
+            t.integer("report_count").defaultTo(0);
+            t.boolean("black_list").defaultTo(false);
+            t.boolean("member_ship").defaultTo(false);
             t.date("create_at");
             t.date("update_at");
         })

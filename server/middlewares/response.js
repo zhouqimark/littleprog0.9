@@ -15,7 +15,7 @@ module.exports = async function (ctx, next) {
             code: ctx.state.code !== undefined ? ctx.state.code : 0,
             message: ctx.state.message !== undefined ? ctx.state.message: "",
             data: ctx.state.data !== undefined ? ctx.state.data : {},
-            registeredStatus: ctx.state.registeredStatus !== undefined ?ctx.state.registeredStatus : {},
+            analysis: ctx.state.analysis !== undefined ?ctx.state.analysis : {},
             decryptedData: ctx.state.decryptedData !== undefined ? ctx.state.decryptedData : {}
         }
     } catch (e) {

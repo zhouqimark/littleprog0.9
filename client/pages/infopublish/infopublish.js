@@ -4,6 +4,8 @@ const msg = require("../../messages/normal");
 const util = require("../../utils/util");
 const Toptips = require("../../zanui-weapp/dist/toptips/index");
 
+App = getApp();
+
 // pages/infopublish/infopublish.js
 Page({
 
@@ -12,7 +14,7 @@ Page({
    */
   data: {
     infoPublish: config.service.infoPublish,
-    currentNavTab: "p2g",
+    currentNavTab: "project_info",
     indicatorDots: false,
     autoplay: false,
     duration: 1000,
@@ -24,6 +26,10 @@ Page({
       project_images: [],
       group_images: [],
       individual_images: []
+    },
+
+    url: {
+      informationUrl: config.service.informationUrl
     },
 
     //field
@@ -57,21 +63,21 @@ Page({
     //tab
     tab: {
       list: [{
-        id: "p2g",
+        id: "project_info",
         title: '项目找班组'
       }, {
-        id: "g2p",
+        id: "group_info",
         title: '班组找项目'
       }, {
-        id: "i2j",
+        id: "individual_info",
         title: '个人找工作'
       }, {
-        id: "a4g",
+        id: "assistance_info",
         title: "帮帮突击队"
       }],
       scroll: true,
       fixed: false,
-      selectedId: "p2g"
+      selectedId: "project_info"
     },
 
     //icon
@@ -319,7 +325,7 @@ Page({
       } else if(index === 1) {
         param["paymentPrice"] = "¥58.8"
       } else {
-        param["paymentPrice"] = "88.8"
+        param["paymentPrice"] = "¥88.8"
       }
     }
     param["showASForPayment"] = false;
@@ -385,7 +391,7 @@ Page({
     }
   },
 
-  handlePayment: function(e) {
+  turnPayOn: function(e) {
     const checked = e.detail.value;
     if(!checked){
       this.setData({
@@ -394,6 +400,45 @@ Page({
     } else {
       this.setData({
         payOn: true
+      })
+    }
+  },
+
+  handlePayment: function(e) {
+
+  },
+
+  handleSubmitP2g: function(e) {
+    const which = this.data.currentNavTab;
+    const user_id ={
+      user_id: App.globalData.user._id
+    }
+    const val = {
+      project_images: this.data.images.project_images,
+      project_type: this.data.checkedProject
+    }
+
+    Object.assign(val, e.detail.value, user_id);
+    console.log(val);
+
+    if(!this.data.payOn) {
+
+      const constr_url = this.data.url.informationUrl + "?which=" + which;
+      console.log(constr_url)
+      qcloud.request({
+        url: constr_url,
+        login: false,
+        method: "POST",
+        data: val,
+
+        success: res => {
+          const data = res.data;
+          console.log(data);
+        },
+
+        fail: res => {
+          console.log(res)
+        }
       })
     }
   },
@@ -408,10 +453,14 @@ Page({
    */
   onLoad: function (options) {
     try{
-      const userInfo = wx.getStorageSync("userInfo");
+      var avatarUrl = "../../images/avatar.png";
+      if(App.globalData.user && App.globalData.user.avatar !== undefined) {
+        avatarUrl = App.globalData.user.avatar;
+      }
+
       this.setData({
-        avatarUrl: userInfo.avatarUrl,
-        nickName: userInfo.nickName
+        avatarUrl: avatarUrl,
+        nickName: App.globalData.user.name
       })
     } catch(e) {
       console.log(e)
@@ -423,7 +472,7 @@ Page({
    */
   onShow: function () {
     //具体是checkUserInfoSettingStatu
-    util.checkSettingStatus();
+    //util.checkSettingStatus();
   },
 
   /**

@@ -13,13 +13,13 @@
 </zan-row>
 
 <view>
-  <view wx:if="{{currentNavTab === 'p2g'}}">
+  <view wx:if="{{currentNavTab === 'project_info'}}">
     <include src="../../template/project2group/project2group.wxml" />
   </view>
-  <view wx:elif="{{currentNavTab === 'g2p'}}">
+  <view wx:elif="{{currentNavTab === 'group_info'}}">
     <include src="../../template/group2project/group2project.wxml" />
   </view>
-  <view wx:elif="{{currentNavTab === 'i2j'}}">
+  <view wx:elif="{{currentNavTab === 'individual_info'}}">
     <include src="../../template/individual2job/individual2job.wxml" />
   </view>
   <view wx:else>

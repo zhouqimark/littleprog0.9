@@ -17,6 +17,7 @@ app.use(bodyParser())
 //app.use(models.address)
 //app.use(models.cart)
 //app.use(models.help)
+//app.use(models.project_info);
 
 // 引入路由分发
 const router = require('./routes')
