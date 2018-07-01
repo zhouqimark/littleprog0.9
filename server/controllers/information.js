@@ -29,10 +29,9 @@ const post = async (ctx, next) => {
         ctx.state.code = 200;
         ctx.state.message = "信息发布成功";
         ctx.state.data = {
-            _id: ret[0]
+            _id: ret[0],
         }
     } catch (err) {
-        //ctx.state.message = err
         console.log(err);
     }
 }

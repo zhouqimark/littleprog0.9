@@ -5,5 +5,5 @@ module.exports = async ctx => {
     // 具体可以查看：
     const data = await uploader(ctx.req)
 
-    ctx.state.data = data
+    ctx.state.data = data;
 }

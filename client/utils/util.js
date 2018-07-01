@@ -1,3 +1,5 @@
+const config = require("../config");
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -83,6 +85,30 @@ const exist = (set, element) => {
   return res;
 }
 
+//递归函数，上传多个图片
+const uploadImages = (filePaths, i, len, ret) => {
+  return new Promise((resolve, reject) => {
+    if(len === 0) resolve(ret);
+
+    wx.uploadFile({
+      url: config.service.uploadUrl,
+      filePath: filePaths[i],
+      name: "file",
+      success: res => {
+        res = JSON.parse(res.data);
+        ret.push(res.data.imgUrl);
+        console.log(ret.length);
+        ++i;
+        if(i !== len) {
+          uploadImages(filePaths, i, len, ret);
+        }
+      }
+    })
+    console.log(ret)
+    resolve(ret);
+  })
+} 
+
 module.exports = {
   formatTime: formatTime,
   checkSettingStatus: checkSettingStatus,
@@ -90,5 +116,6 @@ module.exports = {
   isEmptyObject: isEmptyObject,
   checkPhone: checkPhone,
   checkEmail: checkEmail,
-  exist: exist
+  exist: exist,
+  uploadImages: uploadImages,
 }

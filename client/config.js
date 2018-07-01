@@ -16,7 +16,8 @@ var config = {
         cartClearUrl: `${host}/weapp/cart/clear`,
         defaultAddressUrl: `${host}/weapp/address/default`,
         addressUrl: `${host}/weapp/address`,
-        orderUrl: `${host}/weapp/order`
+        orderUrl: `${host}/weapp/order`,
+        uploadUrl: `${host}/weapp/upload`,
     }
 }
 

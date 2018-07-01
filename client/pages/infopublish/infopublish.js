@@ -408,39 +408,63 @@ Page({
 
   },
 
-  handleSubmitP2g: function(e) {
-    const which = this.data.currentNavTab;
-    const user_id ={
-      user_id: App.globalData.user._id
-    }
-    const val = {
-      project_images: this.data.images.project_images,
-      project_type: this.data.checkedProject
-    }
-
-    Object.assign(val, e.detail.value, user_id);
-    console.log(val);
-
-    if(!this.data.payOn) {
-
-      const constr_url = this.data.url.informationUrl + "?which=" + which;
-      console.log(constr_url)
-      qcloud.request({
-        url: constr_url,
-        login: false,
-        method: "POST",
-        data: val,
-
+  uploadImages: function(filePaths, i, len, imgUrls, callback) {
+    
+      wx.uploadFile({
+        url: config.service.uploadUrl,
+        filePath: filePaths[i],
+        name: "file",
         success: res => {
-          const data = res.data;
-          console.log(data);
-        },
-
-        fail: res => {
-          console.log(res)
+          res = JSON.parse(res.data);
+          imgUrls.push(res.data.imgUrl);
+          ++i;
+          if(i !== len) {
+            this.uploadImages(filePaths, i, len, imgUrls, callback);
+          } else {
+            callback(imgUrls);
+          }
         }
       })
-    }
+  },
+
+  handleSubmitP2g: function(e) {
+    const project_images = this.data.images.project_images;
+    const that = this;
+    this.uploadImages(project_images, 0, project_images.length, [], function(imgUrls){
+      const which = that.data.currentNavTab;
+      const user_id ={
+        user_id: App.globalData.user._id
+      }
+
+      const val = {
+        project_images: imgUrls,
+        project_type: that.data.checkedProject
+      }
+
+      Object.assign(val, e.detail.value, user_id);
+      console.log(val);
+
+      if(!that.data.payOn) {
+
+        const constr_url = that.data.url.informationUrl + "?which=" + which;
+        console.log(constr_url)
+        qcloud.request({
+          url: constr_url,
+          login: false,
+          method: "POST",
+          data: val,
+
+          success: res => {
+            const data = res.data;
+            console.log(data);
+          },
+
+          fail: res => {
+            console.log(res)
+          }
+        })
+      }
+    })
   },
 
   //非监听函数
