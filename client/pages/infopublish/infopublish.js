@@ -447,7 +447,6 @@ Page({
       if(!that.data.payOn) {
 
         const constr_url = that.data.url.informationUrl + "?which=" + which;
-        console.log(constr_url)
         qcloud.request({
           url: constr_url,
           login: false,

@@ -1,7 +1,39 @@
 const { mysql } = require("../qcloud");
 
 const get = async (ctx, next) => {
+    /* const t = ctx.request.query.type;
+    const page = Number(ctx.request.query.page);
+    const limit = Number(ctx.request.query.limit);
 
+    const offset = (page - 1) * limit;
+    const order = ["create_at", "desc"];
+
+    try {
+        const ret = await mysql(t).innerJoin("user", "user._id", t+".user_id").limit(limit).offset(offset).orderBy(...order)
+
+        ctx.state.code = 200;
+        ctx.state.message = "调用成功";
+        var hasNext = true;
+
+        if(ret.length <= limit) {
+            hasNext = false;
+        }
+
+        ctx.state.data = {
+            items: ret,
+            paginate: {
+                page: page,
+                limit: limit,
+                hasNext: hasNext
+            }
+        }
+    } catch (err) {
+        ctx.state.message = err
+        console.log(err);
+    } */
+
+    ctx.state.code = 400;
+    ctx.state.message = "test"
 }
 
 const post = async (ctx, next) => {
