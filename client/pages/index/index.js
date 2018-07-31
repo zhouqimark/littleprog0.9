@@ -1,4 +1,4 @@
-          //index.js
+//index.js
 //获取应用实例
 const App = getApp()
 
@@ -11,36 +11,35 @@ Page({
     shareTitle: "分享筋英汇",
     shareTo: "/pages/index/index",
 
-    allDataLists: [],
     dataLists: [
       {
+        type: "project_info",
         infos: [],
         params: {
-          type: "project_info",
           page: 1,
           limit: 20,
         }
       },
       {
+        type: "group_info",
         infos: [],
         params: {
-          type: "group_info",
           page: 1,
           limit: 20,
         }
       },
       {
+        type: "individual_info",
         infos: [],
         params: {
-          type: "individual_info",
           page: 1,
           limit: 20,
         }
       },
       {
+        type: "assistance_info",
         infos: [],
         params: {
-          type: "assistance_info",
           page: 1,
           limit: 20,
         }
@@ -93,6 +92,10 @@ Page({
     that.setData({
       currentTopItem:e.detail.current
     });
+
+    if(this.needMoreDataAfterSwiper()) {
+      this.refreshNewData();
+    }
   },
 
   //刷新数据
@@ -101,8 +104,9 @@ Page({
       loading: true
     });
     
+    const that = this;
     const dataList = this.data.dataLists[this.data.currentTopItem];
-    const constr_url = this.data.url.informationUrl + "&type=" + dataList.params.type + "&page=" + dataList.params.page + "&limit=" + dataList.params.limit;
+    const constr_url = this.data.url.informationUrl + "?type=" + dataList.type + "&page=1" + "&limit=" + dataList.params.limit;
     console.log(constr_url)
     qcloud.request({
       url: constr_url,
@@ -110,6 +114,7 @@ Page({
       success: res => {
         const data = res.data;
         console.log(data);
+        that.setNewDataWithRes(data,that);
       },
 
       fail: res => {
@@ -119,17 +124,64 @@ Page({
   },
 
   onShow: function () {
+    console.log(this.data)
   },
 
   onPullDownRefresh: function () {
     this.refreshNewData();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+  needMoreDataAfterSwiper: function() {
+    return this.data.dataLists[this.data.currentTopItem].infos.length > 0 ? false : true;
+  },
 
+  setNewDataWithRes: function(res,target) {
+    var params = {};
+    const dataLists = target.data.dataLists;
+    const info = "dataLists[" + target.data.currentTopItem + "].infos";
+    const paginate = "dataLists[" + target.data.currentTopItem + "].params"
+    params[info] = res.data.items;
+    params[paginate] = res.data.paginate;
+    target.setData(params);
+  },
+
+  loadMoreData: function() {
+    if(!this.data.dataList[this.data.currentTopItem].params.hasNext) return;
+    console.log("load more");
+
+    //加载提示框
+    this.setData({
+      loading: true
+    });
+    
+    const that = this;
+    const dataList = this.data.dataLists[this.data.currentTopItem];
+    const constr_url = this.data.url.informationUrl + "?type=" + dataList.type + "&page=" + (dataList.params.page + 1) + "&limit=" + dataList.params.limit;
+    console.log(constr_url)
+    qcloud.request({
+      url: constr_url,
+      method: "GET",
+      success: res => {
+        const data = res.data;
+        console.log(data);
+        that.setMoreDataWithRes(data, that);
+      },
+
+      fail: res => {
+        console.log(res)
+      }
+    })
+
+  },
+
+  setMoreDataWithRes: function(res, target) {
+    var params = {};
+    const dataLists = target.data.dataLists;
+    const info = "dataLists[" + target.data.currentTopItem + "].infos";
+    const paginate = "dataLists[" + target.data.currentTopItem + "].params"
+    params[info] = dataLists[target.data.currentTopItem].infos.concat(res.data.items);
+    params[paginate] = res.data.paginate;
+    target.setData(params);
   },
 
   /**

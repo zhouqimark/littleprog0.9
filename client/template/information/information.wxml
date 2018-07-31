@@ -5,12 +5,12 @@
         <view class="top">
         
             <!--头像-->
-            <image class="avator" src="{{item.profile_image}}" mode="aspectFit"></image>
+            <image class="avator" src="{{item.avatar}}" mode="aspectFit"></image>
 
             <!--标题、时间-->
             <view class="title-time">
                 <text class="title">{{item.name}}</text>
-                <text class="time">{{item.create_time}}</text>
+                <text class="time">{{item.create_at}}</text>
             </view>
             
             <!--更多按钮-->
@@ -21,11 +21,11 @@
         <!--内容-->
         <view class="content">
 
-            <text class="content-text">{{item.text}}</text>
+            <text class="content-text">{{item.content}}</text>
 
             <!--大图-->
-            <view class="content-multimedia" hidden="{{(item.image1 && (!item.videouri && !item.voiceuri))  ? false : true}}" >
-                <image hidden="{{true}}" src="{{item.image1}}" mode="scaleToFill" style="width:{{item.width}}rpx;height:{{item.height}}rpx;"></image>
+            <view class="content-multimedia" hidden="{{item.attach_img ? false : true}}">
+                <image hidden="{{true}}" src="{{item.attach_img}}" mode="scaleToFill" style="width:{{item.width}}rpx;height:{{item.height}}rpx;"></image>
             </view>
 
             <!--视频-->
@@ -47,7 +47,7 @@
             <view class="bottom-item" catchtap="zanEvent">
                 <view class="bottom-item-content">
                 <image src="../../images/index/mainCellDing.png" mode="center"></image>
-                <text class="bottom-item-zan-text">{{item.love}}</text>
+                <text class="bottom-item-zan-text">{{item.vote}}</text>
                 </view>
                 <!--分割线-->
                 <view class="cut-line"></view>
@@ -64,14 +64,13 @@
             </view> -->
 
             <!--转发-->
-            <view class="bottom-item">
+            <!-- <view class="bottom-item">
                 <view class="bottom-item-content">
                 <image src="../../images/index/mainCellShare.png" mode="center"></image>
                 <text class="bottom-item-zan-text">{{item.repost}}</text>
                 </view>
-                <!--分割线-->
                 <view class="cut-line"></view>
-            </view>
+            </view> -->
 
             <!--评论-->
             <view class="bottom-item">

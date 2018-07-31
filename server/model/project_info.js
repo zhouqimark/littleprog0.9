@@ -5,7 +5,7 @@ const createTable = () => { mysql.schema.hasTable("project_info").then(exists =>
         return mysql.schema.createTable("project_info", t => {
             t.increments("_id").primary();
             t.integer("user_id").references("user._id");
-            t.string("name", 50);
+            t.string("title", 50);
             t.string("type", 50);
             t.string("area", 50);
             t.string("contact", 50);

@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<import src="../../template/information.wxml" />
+<import src="../../template/information/information.wxml" />
 <import src="../../zanui-weapp/dist/loadmore/index.wxml" />
 <template is="zan-loadmore" data="{{ loading: false }}" />
 
@@ -15,8 +15,8 @@
   <swiper-item>
     <scroll-view class="scrollView" scroll-y="true" bindscrolltolower="loadMoreData" >
       
-      <block wx:for="{{allDataList}}" wx:for-item="item">
-          <navigator url="detail?id={{item.id}}">
+      <block wx:for="{{dataLists[0].infos}}" wx:for-item="item">
+          <navigator url="detail?id={{item._id}}">
             <template is="mainTabCell" data="{{item}}" />
           </navigator>
       </block>
@@ -29,7 +29,7 @@
     <scroll-view class="scrollView" scroll-y="true" bindscrolltolower="loadMoreData" bindscrolltoupper="refreshData" >
       
       <block wx:for="{{videoDataList}}" wx:for-item="item">
-          <navigator url="detail?id={{item.id}}">
+          <navigator url="detail?id={{item._id}}">
             <template is="mainTabCell" data="{{item}}" />
           </navigator>
       </block>
@@ -42,7 +42,7 @@
     <scroll-view class="scrollView" scroll-y="true" bindscrolltolower="loadMoreData" bindscrolltoupper="refreshData">
       
       <block wx:for="{{pictureDataList}}" wx:for-item="item">
-          <navigator url="detail?id={{item.id}}">
+          <navigator url="detail?id={{item._id}}">
             <template is="mainTabCell" data="{{item}}" />
           </navigator>
       </block>
@@ -55,7 +55,7 @@
     <scroll-view class="scrollView" scroll-y="true" bindscrolltolower="loadMoreData" bindscrolltoupper="refreshData">
       
       <block wx:for="{{textDataList}}" wx:for-item="item">
-          <navigator url="detail?id={{item.id}}">
+          <navigator url="detail?id={{item._id}}">
             <template is="mainTabCell" data="{{item}}" />
           </navigator>
       </block>

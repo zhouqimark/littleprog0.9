@@ -415,6 +415,7 @@ Page({
         filePath: filePaths[i],
         name: "file",
         success: res => {
+          console.log(res.data);
           res = JSON.parse(res.data);
           imgUrls.push(res.data.imgUrl);
           ++i;
@@ -466,11 +467,11 @@ Page({
     })
   },
 
-  //非监听函数
+  //工具函数
   showToptips(content) {
     Toptips(content);
   },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
